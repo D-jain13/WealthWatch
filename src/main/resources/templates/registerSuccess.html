@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Successful</title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <style>
+        /* Add your animation CSS here */
+        .success-animation {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-size: 32px;
+            font-weight: bold;
+            opacity: 0;
+            animation: fadeIn 2s ease-in-out forwards, scaleUp 1s ease-in-out forwards;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes scaleUp {
+            0% {
+                transform: scale(0);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="success-animation">
+        Registration Successful!
+    </div>
+    <script>
+        // Redirect to the login page after a delay
+        setTimeout(function() {
+            window.location.href = "/login";
+        }, 3000); // Redirect after 3 seconds (adjust as needed)
+    </script>
+</body>
+</html>

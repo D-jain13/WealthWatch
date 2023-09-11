@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <h1>Welcome to Your Dashboard</h1>
+        
+        <!-- Display current value and invested value -->
+        <div class="dashboard-info">
+            <p>Current Value: <span th:text="${currentValue}"></span></p>
+            <p>Invested Value: <span th:text="${investedValue}"></span></p>
+        </div>
+        
+        <!-- List of user's portfolios -->
+        <h2>Your Portfolios:</h2>
+        <ul>
+            <li th:each="portfolio : ${userPortfolios}">
+                <a th:href="@{'/portfolio/' + ${portfolio.id}}" th:text="${portfolio.name}"></a>
+            </li>
+        </ul>
+        <a href="/create-portfolio" class="create-portfolio-button">Create Portfolio</a>
+    </div>
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Successfull Login</title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <style>
+        .animation-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-size: 48px; 
+            color: green;
+            font-weight: bold;
+            animation: fadeInOut 3s ease-in-out forwards;
+        }
+
+        @keyframes fadeInOut {
+            0% {
+                opacity: 0;
+                font-size: 48px; 
+            }
+            50% {
+                opacity: 1;
+                font-size: 64px; 
+            }
+            100% {
+                opacity: 0;
+                font-size: 48px; 
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="animation-container">
+        <div class="welcome-text">
+            Welcome to Wealth Watch
+        </div>
+    </div>
+    <script>
+        setTimeout(function() {
+            window.location.href = "/dashboard"; 
+        }, 3000); 
+    </script>
+</body>
+</html>
