@@ -1,36 +1,45 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registration Page</title>
-    <link rel="stylesheet" href="/css/styles.css">
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Registration Page</title>
+	<link rel="stylesheet" href="/css/styles.css">
 </head>
+
 <body>
-    <div class="registration-container">
-        <div class="registration-box">
-            <h2>Register</h2>
-            <form th:action="@{/registerSuccess}" method="POST">
-                <div class="input-container">
-                    <label for="name">Name:</label>
-                    <input type="text" id="name" name="name" placeholder="Enter your name" required>
-                </div>
-                <div class="input-container">
-                    <label for="email">Email:</label>
-                    <input type="text" id="email" name="email" placeholder="Enter your email" required>
-                </div>
-                <div class="input-container">
-                    <label for="mobile">Mobile Number:</label>
-                    <input type="text" id="mobile" name="mobile" placeholder="Enter your mobile number" required>
-                </div>
-                <div class="input-container">
-                    <label for="password">Password:</label>
-                    <input type="password" id="password" name="password" placeholder="Enter your password" required>
-                </div>
-                <button type="submit">Register</button>
-            </form>
-            <p>Already have an account? <a href="/login">Login here</a></p>
-        </div>
-    </div>
+	<div class="registration-container">
+		<div class="registration-box">
+			<h2>Register</h2>
+
+			<form th:action="@{/registerSuccess}" method="POST">
+				<div class="input-container">
+					<label for="name">Name:</label>
+					<input type="text" id="name" name="name" placeholder="Enter your name" required>
+				</div>
+				<div class="input-container">
+					<label for="email">Email:</label>
+					<input type="text" id="email" name="email" placeholder="Enter your email" required>
+				</div>
+				<div class="input-container">
+					<label for="mobileNumber">Mobile Number:</label>
+					<input type="text" id="mobileNumber" name="mobileNumber" placeholder="Enter your mobile number"
+						required>
+				</div>
+				<div class="input-container">
+					<label for="password">Password:</label>
+					<input type="password" id="password" name="password" placeholder="Enter your password" required>
+				</div>
+				<button type="submit">Register</button>
+			</form>
+			<p>Already have an account? <a href="/login">Login here</a></p>
+		</div>
+		<div id="error-popup" class="popup">
+			<span id="error-message"></span>
+			<button id="close-popup">Close</button>
+		</div>
+	</div>
 </body>
+
 </html>

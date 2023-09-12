@@ -1,29 +1,29 @@
-<!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login Page</title>
-    <link rel="stylesheet" href="/css/styles.css">
-
-</head>
-<body>
-    <div class="login-container">
-        <div class="login-box">
-            <h2>Login</h2>
-            <form th:action="@{/loginSuccess}" method="POST">
-                <div class="input-container">
-                    <label for="username">Username:</label>
-                    <input type="text" id="username" name="username" placeholder="Enter your email" th:required="true">
-                </div>
-                <div class="input-container">
-                    <label for="password">Password:</label>
-                    <input type="password" id="password" name="password"  placeholder="Enter your password" th:required="true">
-                </div>
-                <button type="submit">Login</button>
-            </form>
-            <p>Don't have an account? <a href="/register">Register here</a></p>
-        </div>
-    </div>
-</body>
-</html>
+	<!DOCTYPE html>
+	<html lang="en" xmlns:th="http://www.thymeleaf.org">
+	<head>
+	    <meta charset="UTF-8">
+	    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	    <title>Login Page</title>
+	    <link rel="stylesheet" href="/css/styles.css">
+	
+	</head>
+	<body>
+	    <div class="login-container">
+	        <div class="login-box">
+	            <h2 class="login-heading">Login</h2>
+	            <form th:action="@{/login}" method="POST">
+	                <div class="input-container">
+	                    <label for="username">Username:</label>
+	                    <input type="text" id="username" name="username" placeholder="Enter your email" th:required="true">
+	                </div>
+	                <div class="input-container">
+	                    <label for="password">Password:</label>
+	                    <input type="password" id="password" name="password"  placeholder="Enter your password" th:required="true">
+	                </div>
+	                <button type="submit">Login</button>
+	            </form>
+	            <p>Don't have an account? <a href="/register">Register here</a></p>
+	        </div>
+	    </div>
+	</body>
+	</html>

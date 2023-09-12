@@ -13,6 +13,13 @@ body {
     text-align: center;
 }
 
+.login-heading {
+     font-family: "Your Font", sans-serif; /* Replace "Your Font" with the desired font name or use a web font */
+    color: green;
+    margin-top: 10px;
+    font-size: 28px; 
+}
+
 .login-box {
     background-color: #ffffff;
     padding: 60px; /* Set padding to 60px */
@@ -34,6 +41,14 @@ body {
     max-width: 500px;
     margin: 0 auto;
 }
+
+.error {
+    color: red;
+    font-size: 16px;
+    margin-top: 10px;
+    font-weight: bold;
+}
+
 .dashboard-container {
     background-color: #f7f7f7;
     font-family: Arial, sans-serif;

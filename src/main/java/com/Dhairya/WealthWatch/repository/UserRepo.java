@@ -7,5 +7,6 @@ import com.Dhairya.WealthWatch.entity.User;
 
 @Repository
 public interface UserRepo extends JpaRepository<User, String> {
-
+	
+	User findByEmail(String email);
 }
