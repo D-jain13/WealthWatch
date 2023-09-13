@@ -1,19 +1,22 @@
 package com.Dhairya.WealthWatch.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import com.Dhairya.WealthWatch.entity.User;
 import com.Dhairya.WealthWatch.exception.RegistrationException;
-import com.Dhairya.WealthWatch.service.UserService;
+import com.Dhairya.WealthWatch.service.RegistrationService;
 
 @Controller
 public class WealthController {
 	
 	@Autowired
-	private UserService userService;
+	private RegistrationService registrationService;
+	
 	
 	@GetMapping("/")
 	public String redirectToLogin() {
@@ -43,7 +46,7 @@ public class WealthController {
 	@PostMapping("/registerSuccess")
 	public String showRegisterSucess(User user,Model model) {
 		try {
-			userService.registration(user);
+			registrationService.registration(user);
 			return "registerSuccess";
 		}
 		catch (RegistrationException e) {
@@ -55,6 +58,7 @@ public class WealthController {
 	
 	@GetMapping("/dashboard")
 	public String showDashboard() {
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		return "dashboard";
 	}
 }

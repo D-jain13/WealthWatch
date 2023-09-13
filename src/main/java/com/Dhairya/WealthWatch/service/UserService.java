@@ -1,31 +1,63 @@
 package com.Dhairya.WealthWatch.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.stereotype.Service;
+import java.util.Collection;
+
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import com.Dhairya.WealthWatch.entity.User;
-import com.Dhairya.WealthWatch.exception.RegistrationException;
-import com.Dhairya.WealthWatch.repository.UserRepo;
 
-@Service
-public class UserService {
 
-	@Autowired
-	private UserRepo userRepo;
+public class UserService implements UserDetails  {
 	
-	@Autowired
-	private PasswordEncoder passwordEncoder;
+	private String email;
+	private String password;
 	
-	public void registration(User user) throws RegistrationException {
-		
-		if(userRepo.findByEmail(user.getEmail())!=null) {
-			throw new RegistrationException("Email already exists");
-		}
-		
-		String encodedPassword = passwordEncoder.encode(user.getPassword());
-		user.setPassword(encodedPassword);
-		userRepo.save(user);
-		
+	public UserService(User user) {
+		email = user.getEmail();
+		password = user.getPassword();
 	}
+	
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String getPassword() {
+		// TODO Auto-generated method stub
+		return password;
+	}
+
+	@Override
+	public String getUsername() {
+		// TODO Auto-generated method stub
+		return email;
+	}
+
+	@Override
+	public boolean isAccountNonExpired() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+
+	@Override
+	public boolean isAccountNonLocked() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+
+	@Override
+	public boolean isCredentialsNonExpired() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+
+	@Override
+	public boolean isEnabled() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+
 }
