@@ -1,4 +1,5 @@
 /* styles.css */
+@charset "UTF-8";
 body {
     background-color: #f7f7f7;
     font-family: Arial, sans-serif;
@@ -14,7 +15,6 @@ body {
 }
 
 .login-heading {
-     
     color: green;
     margin-top: 10px;
     font-size: 28px; 
@@ -158,3 +158,104 @@ a {
 a:hover {
     text-decoration: underline;
 }
+
+/* Dashboard-specific styles */
+.dashboard-content {
+    margin-top: 20px;
+}
+
+.dashboard-content p {
+    font-size: 16px;
+    color: #333;
+    margin: 10px 0;
+}
+
+.dashboard-content .button-container {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.profit-loss {
+    font-size: 18px;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+.dashboard-container {
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    max-width: 800px;
+    margin: 20px auto;
+    display: flex;
+}
+
+.dashboard-info {
+    padding: 20px;
+    flex: 1;
+}
+
+.value-box {
+    background-color: #f7f7f7;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    flex: 1;
+}
+
+.current-value,
+.invested-amount,
+.profit-loss {
+    margin-bottom: 10px;
+}
+
+.profit-loss {
+    font-weight: bold;
+}
+.top-bar {
+    background-color: #007BFF;
+    color: #fff;
+    padding: 10px 0;
+    text-align: center;
+}
+/* Update styles for the header bar */
+.top-bar {
+    background-color:#E7CD56 ;
+    color: #fff;
+    padding: 20px 0;
+    text-align: left;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1;
+}
+.dashboard-container {
+    margin-top: 60px; /* Ensure content starts below the header */
+}
+.top-bar-buttons {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.header-button {
+    background-color:white;
+    color:#7948B8;
+    text-decoration: none;
+    margin: 0 20px;
+    padding: 10px 30px;
+    border-radius: 5px;
+    font-weight: bold;
+    font-size: 18px;
+    transition: background-color 0.3s;
+}
+
+.dashboard-welcome {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #333; /* Text color for the "Hello, username" message */
+    text-align: left;
+}
+/* Adjust styles for the content below the header */
+

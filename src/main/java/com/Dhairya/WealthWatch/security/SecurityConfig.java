@@ -9,12 +9,12 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.web.client.RestTemplate;
 
 import com.Dhairya.WealthWatch.service.UserInfoDetailsService;
 
 @Configuration
 @EnableWebSecurity
-@EnableMethodSecurity
 public class SecurityConfig {
 	
 	@Bean
@@ -22,6 +22,7 @@ public class SecurityConfig {
 		return new BCryptPasswordEncoder();
 	}
 	
+	@SuppressWarnings("unused")
 	private UserDetailsService userDetailsService(PasswordEncoder passwordEncoder) {
 		return new UserInfoDetailsService();
 	}
@@ -30,15 +31,16 @@ public class SecurityConfig {
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 		http
 		.authorizeHttpRequests((authorize)-> authorize
-				.requestMatchers("/login","/register").permitAll()
-				.requestMatchers("/dashboard")
+				.requestMatchers("/login","/register","/css/**").permitAll()
+				.requestMatchers("/**").permitAll()
+				.requestMatchers("/user/**")
 				.anonymous()
 				.anyRequest().authenticated()
 				)
 			
 			.formLogin((form) -> form
 				.loginPage("/login")
-				.defaultSuccessUrl("/dashboard")
+				.defaultSuccessUrl("/user/dashboard")
 				.permitAll()
 				)
 			

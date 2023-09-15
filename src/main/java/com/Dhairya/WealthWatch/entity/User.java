@@ -19,13 +19,37 @@ public class User {
 	
 	@Column(name="password",nullable = false)
 	private String password;
-
+	
+	@Column(name="invested")
+	private double invested;
+	
+	@Column(name="current")
+	private double current;
+	
 	public User(String name, String email, String mobileNumber, String password) {
 		super();
 		Name = name;
 		this.email = email;
 		this.mobileNumber = mobileNumber;
 		this.password = password;
+		this.invested = 0.0;
+		this.current = 0.0;
+	}
+
+	public double getInvested() {
+		return invested;
+	}
+
+	public void setInvested(double invested) {
+		this.invested = invested;
+	}
+
+	public double getCurrent() {
+		return current;
+	}
+
+	public void setCurrent(double current) {
+		this.current = current;
 	}
 
 	public User() {
@@ -68,7 +92,9 @@ public class User {
 	@Override
 	public String toString() {
 		return "User [Name=" + Name + ", email=" + email + ", mobileNumber=" + mobileNumber + ", password=" + password
-				+ "]";
+				+ ", invested=" + invested + ", current=" + current + "]";
 	}
+
+	
 	
 }
