@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.*;
 
 import com.Dhairya.WealthWatch.entity.User;
 import com.Dhairya.WealthWatch.exception.RegistrationException;
-import com.Dhairya.WealthWatch.modal.StockQuote;
 import com.Dhairya.WealthWatch.repository.UserRepo;
 import com.Dhairya.WealthWatch.service.AlphaVantageService;
 import com.Dhairya.WealthWatch.service.RegistrationService;
@@ -86,6 +85,12 @@ public class WealthController {
 		}
 	
 		return "dashboard";
+	}
+	
+	@GetMapping("/stock")
+	private String stock() {
+		alphaService.getStockQuote();
+		return "test";
 	}
 	
 	private String name() {
