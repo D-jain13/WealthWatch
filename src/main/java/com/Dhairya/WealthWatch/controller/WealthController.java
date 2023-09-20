@@ -95,7 +95,6 @@ public class WealthController {
 	
 	private String name() {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		
 		return authentication.getName();
 	}
 }
