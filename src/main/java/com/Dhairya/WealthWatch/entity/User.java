@@ -1,8 +1,12 @@
 package com.Dhairya.WealthWatch.entity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 
 @Entity
 public class User {
@@ -20,11 +24,14 @@ public class User {
 	@Column(name="password",nullable = false)
 	private String password;
 	
-	@Column(name="invested")
-	private double invested;
+	@Column(name="invested",columnDefinition = "double default 0.0")
+	private double invested_value;
 	
-	@Column(name="current")
-	private double current;
+	@Column(name="current",columnDefinition = "double default 0.0")
+	private double current_value;
+	
+	@Column(name="portfolio_id")
+	private List<Long> portfolios_id;
 	
 	public User(String name, String email, String mobileNumber, String password) {
 		super();
@@ -32,24 +39,23 @@ public class User {
 		this.email = email;
 		this.mobileNumber = mobileNumber;
 		this.password = password;
-		this.invested = 0.0;
-		this.current = 0.0;
+		this.portfolios_id = new ArrayList<>();
 	}
 
 	public double getInvested() {
-		return invested;
+		return invested_value;
 	}
 
 	public void setInvested(double invested) {
-		this.invested = invested;
+		this.invested_value = invested;
 	}
 
 	public double getCurrent() {
-		return current;
+		return current_value;
 	}
 
-	public void setCurrent(double current) {
-		this.current = current;
+	public void setCurrent(Double current) {
+		this.current_value = current;
 	}
 
 	public User() {
@@ -92,7 +98,7 @@ public class User {
 	@Override
 	public String toString() {
 		return "User [Name=" + Name + ", email=" + email + ", mobileNumber=" + mobileNumber + ", password=" + password
-				+ ", invested=" + invested + ", current=" + current + "]";
+				+ ", invested=" + invested_value + ", current=" + current_value + "]";
 	}
 
 	

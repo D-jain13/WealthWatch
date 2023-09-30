@@ -30,7 +30,7 @@ public class AlphaVantageService {
 	private int startIndex = 0;
 	private int dailyCount = 0;
 
-	@Scheduled(cron = "0 0 1 * * ?")
+	//@Scheduled(cron = "0 0 1 * * ?")
 	public void getStockQuoteAutomatically() {
 		if (isDayChanged()) {
             dailyCount = 0;
@@ -41,7 +41,7 @@ public class AlphaVantageService {
 		}
 	}
 
-	@Scheduled(fixedDelay = 60000)
+	//@Scheduled(fixedDelay = 60000)
 	public void getStockQuoteAutomaticallyEvery5Minute() {
 		if (dailyCount < 50) {
 			getStockQuote();

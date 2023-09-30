@@ -6,15 +6,24 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.AuthenticationUserDetailsService;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.service.invoker.RequestAttributeArgumentResolver;
 
+import com.Dhairya.WealthWatch.entity.Portfolio;
+import com.Dhairya.WealthWatch.entity.Stock;
 import com.Dhairya.WealthWatch.entity.User;
 import com.Dhairya.WealthWatch.exception.RegistrationException;
+import com.Dhairya.WealthWatch.repository.PortfolioRepo;
+import com.Dhairya.WealthWatch.repository.StockRepo;
 import com.Dhairya.WealthWatch.repository.UserRepo;
 import com.Dhairya.WealthWatch.service.AlphaVantageService;
 import com.Dhairya.WealthWatch.service.RegistrationService;
+
+import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class WealthController {
@@ -27,6 +36,12 @@ public class WealthController {
 	
 	@Autowired
 	private AlphaVantageService alphaService;
+	
+	@Autowired
+	private StockRepo stockRepo;
+	
+	@Autowired
+	private PortfolioRepo portfolioRepo;
 	
 	@GetMapping("/")
 	public String redirectToLogin() {
@@ -87,14 +102,37 @@ public class WealthController {
 		return "dashboard";
 	}
 	
-	@GetMapping("/stock")
-	private String stock() {
-		alphaService.getStockQuote();
-		return "test";
+	@GetMapping("/user/portfolios")
+	private String listAllPortfolios(Model model) {
+		List<Portfolio> portfolios = portfolioRepo.findAllByUserEmail(name());
+		model.addAttribute("portfolios", portfolios);
+		return "portfolios";
+	}
+	
+	@GetMapping("/user/stocks")
+	private String listAllStock(Model model ) {
+		List<Stock> list = stockRepo.findAll();
+		model.addAttribute("Stocks", list);
+		return "stock";
+	}
+	
+	@GetMapping("/user/createPortfolio")
+	private String loadCreatePortfolioPage() {
+		return "createPortfolio";
+	}
+	
+	@PostMapping("/user/create-portfolio")
+	private String portfolioCreater(Portfolio portfolio) {
+		String userEmail = name();
+		portfolio.setUserEmail(userEmail);
+		portfolioRepo.save(portfolio);
+		return "redirect:/user/dashboard";
 	}
 	
 	private String name() {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		return authentication.getName();
 	}
+	
+	
 }

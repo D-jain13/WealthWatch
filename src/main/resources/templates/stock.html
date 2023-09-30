@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Stocks</title>
+    <link rel="stylesheet"  href="/css/styles.css">
+</head>
+<body>
+    <h1>Stock Details</h1>
+    <table>
+		<thead>
+			<tr>
+				<th>Symbol</th>
+				<th>Price</th>
+				<th>Previous Close</th>
+				<th>Change</th>
+				<th>Percent Change</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="stock: ${Stocks}">
+				<td th:text="${stock.symbol}"></td>
+				<td th:text="${stock.price}"></td>
+				<td th:text="${stock.prevClose}"></td>
+				<td th:text="${stock.change}"></td>
+				<td th:text="${stock.changePercent}"></td>
+			</tr>
+		</tbody>
+	</table>
+</body>
+</html>

@@ -1,261 +1,369 @@
 /* styles.css */
 @charset "UTF-8";
+
 body {
-    background-color: #f7f7f7;
-    font-family: Arial, sans-serif;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    margin: 0;
+	background-color: #f7f7f7;
+	font-family: Arial, sans-serif;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100vh;
+	margin: 0;
 }
 
 .login-container {
-    text-align: center;
+	text-align: center;
 }
 
 .login-heading {
-    color: green;
-    margin-top: 10px;
-    font-size: 28px; 
+	color: green;
+	margin-top: 10px;
+	font-size: 28px;
 }
 
 .login-box {
-    background-color: #ffffff;
-    padding: 60px; /* Set padding to 60px */
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    max-width: 400px;
-    margin: 0 auto;
+	background-color: #ffffff;
+	padding: 60px;
+	/* Set padding to 60px */
+	border-radius: 10px;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+	max-width: 400px;
+	margin: 0 auto;
 }
 
 .registration-container {
-    text-align: center;
+	text-align: center;
 }
 
 .registration-box {
-    background-color: #ffffff;
-    padding: 40px; /* Set padding to 60px */
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    max-width: 500px;
-    margin: 0 auto;
+	background-color: #ffffff;
+	padding: 40px;
+	/* Set padding to 60px */
+	border-radius: 10px;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+	max-width: 500px;
+	margin: 0 auto;
 }
 
 .dashboard-container {
-    background-color: #f7f7f7;
-    font-family: Arial, sans-serif;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    max-width: 800px;
-    margin: 20px auto;
+	background-color: #f7f7f7;
+	font-family: Arial, sans-serif;
+	padding: 20px;
+	border-radius: 10px;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+	max-width: 800px;
+	margin: 20px auto;
 }
 
 .dashboard-header {
-    background-color: #007BFF;
-    color: #fff;
-    padding: 20px;
-    text-align: center;
-    border-radius: 10px 10px 0 0;
+	background-color: #007BFF;
+	color: #fff;
+	padding: 20px;
+	text-align: center;
+	border-radius: 10px 10px 0 0;
 }
 
 .dashboard-heading {
-    font-size: 24px;
-    font-weight: bold;
-    margin-bottom: 20px;
+	font-size: 24px;
+	font-weight: bold;
+	margin-bottom: 20px;
 }
 
 .dashboard-info {
-    background-color: #ffffff;
-    padding: 20px;
-    border-radius: 0 0 10px 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+	background-color: #ffffff;
+	padding: 20px;
+	border-radius: 0 0 10px 10px;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 .dashboard-info p {
-    font-size: 16px;
-    color: #333;
-    margin: 10px 0;
+	font-size: 16px;
+	color: #333;
+	margin: 10px 0;
 }
 
 .dashboard-list {
-    list-style: none;
-    padding: 0;
-    margin-top: 20px;
+	list-style: none;
+	padding: 0;
+	margin-top: 20px;
 }
 
 .dashboard-list li {
-    padding: 10px 0;
-    border-bottom: 1px solid #ccc;
+	padding: 10px 0;
+	border-bottom: 1px solid #ccc;
 }
 
 .create-portfolio-button {
-    display: inline-block;
-    background-color: #007BFF;
-    color: #fff;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    text-decoration: none;
-    margin-top: 20px;
-    font-size: 16px;
-    cursor: pointer;
+	display: inline-block;
+	background-color: #007BFF;
+	color: #fff;
+	padding: 10px 20px;
+	border: none;
+	border-radius: 5px;
+	text-decoration: none;
+	margin-top: 20px;
+	font-size: 16px;
+	cursor: pointer;
 }
 
 .create-portfolio-button:hover {
-    background-color: #0056b3;
+	background-color: #0056b3;
 }
 
 h2 {
-    color: #333;
-    margin-bottom: 20px;
+	color: #333;
+	margin-bottom: 20px;
 }
 
 .input-container {
-    margin: 20px 0;
-    text-align: left; /* Left-align input fields within the container */
+	margin: 20px 0;
+	text-align: left;
+	/* Left-align input fields within the container */
 }
 
 label {
-    font-weight: bold;
-    display: block;
-    margin-bottom: 10px; /* Increased margin-bottom */
-    color: #555;
+	font-weight: bold;
+	display: block;
+	margin-bottom: 10px;
+	/* Increased margin-bottom */
+	color: #555;
 }
 
 input[type="text"],
 input[type="password"] {
-    width: 90%; /* Both input fields have the same width */
-    padding: 15px; /* Increased padding */
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 16px;
-    color: #333;
+	width: 90%;
+	/* Both input fields have the same width */
+	padding: 15px;
+	/* Increased padding */
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	font-size: 16px;
+	color: #333;
 }
 
 button {
-    background-color: #007BFF;
-    color: #fff;
-    padding: 15px 30px; /* Increased padding */
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-    transition: background-color 0.3s;
+	background-color: #007BFF;
+	color: #fff;
+	padding: 15px 30px;
+	/* Increased padding */
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+	font-size: 16px;
+	transition: background-color 0.3s;
 }
 
 button:hover {
-    background-color: #0056b3;
+	background-color: #0056b3;
 }
 
 a {
-    text-decoration: none;
-    color: #007BFF;
-    font-weight: bold;
+	text-decoration: none;
+	color: #007BFF;
+	font-weight: bold;
 }
 
 a:hover {
-    text-decoration: underline;
+	text-decoration: underline;
 }
 
 /* Dashboard-specific styles */
 .dashboard-content {
-    margin-top: 20px;
+	margin-top: 20px;
 }
 
 .dashboard-content p {
-    font-size: 16px;
-    color: #333;
-    margin: 10px 0;
+	font-size: 16px;
+	color: #333;
+	margin: 10px 0;
 }
 
 .dashboard-content .button-container {
-    text-align: center;
-    margin-top: 20px;
+	text-align: center;
+	margin-top: 20px;
 }
 
 .profit-loss {
-    font-size: 18px;
-    font-weight: bold;
-    margin-top: 10px;
+	font-size: 18px;
+	font-weight: bold;
+	margin-top: 10px;
 }
 
 .dashboard-container {
-    background-color: #ffffff;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    max-width: 800px;
-    margin: 20px auto;
-    display: flex;
+	background-color: #ffffff;
+	border-radius: 10px;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+	max-width: 800px;
+	margin: 20px auto;
+	display: flex;
 }
 
 .dashboard-info {
-    padding: 20px;
-    flex: 1;
+	padding: 20px;
+	flex: 1;
 }
 
 .value-box {
-    background-color: #f7f7f7;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    flex: 1;
+	background-color: #f7f7f7;
+	padding: 20px;
+	border-radius: 10px;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+	flex: 1;
 }
 
 .current-value,
 .invested-amount,
 .profit-loss {
-    margin-bottom: 10px;
+	margin-bottom: 10px;
 }
 
 .profit-loss {
-    font-weight: bold;
+	font-weight: bold;
 }
+
 .top-bar {
-    background-color: #007BFF;
-    color: #fff;
-    padding: 10px 0;
-    text-align: center;
+	background-color: #007BFF;
+	color: #fff;
+	padding: 10px 0;
+	text-align: center;
 }
+
 /* Update styles for the header bar */
 .top-bar {
-    background-color:#E7CD56 ;
-    color: #fff;
-    padding: 20px 0;
-    text-align: left;
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: 1;
+	background-color: #E7CD56;
+	color: #fff;
+	padding: 20px 0;
+	text-align: left;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	z-index: 1;
 }
+
 .dashboard-container {
-    margin-top: 60px; /* Ensure content starts below the header */
+	margin-top: 60px;
+	/* Ensure content starts below the header */
 }
+
 .top-bar-buttons {
-    max-width: 800px;
-    margin: 0 auto;
+	max-width: 800px;
+	margin: 0 auto;
 }
 
 .header-button {
-    background-color:white;
-    color:#7948B8;
-    text-decoration: none;
-    margin: 0 20px;
-    padding: 10px 30px;
-    border-radius: 5px;
-    font-weight: bold;
-    font-size: 18px;
-    transition: background-color 0.3s;
+	background-color: white;
+	color: #7948B8;
+	text-decoration: none;
+	margin: 0 20px;
+	padding: 10px 30px;
+	border-radius: 5px;
+	font-weight: bold;
+	font-size: 18px;
+	transition: background-color 0.3s;
 }
 
 .dashboard-welcome {
-    font-size: 24px;
-    font-weight: bold;
-    margin-bottom: 20px;
-    color: #333; /* Text color for the "Hello, username" message */
-    text-align: left;
+	font-size: 24px;
+	font-weight: bold;
+	margin-bottom: 20px;
+	color: #333;
+	/* Text color for the "Hello, username" message */
+	text-align: left;
 }
+
 /* Adjust styles for the content below the header */
 
+h1 {
+	color: #333;
+}
+
+table {
+	border-collapse: collapse;
+	width: 80%;
+	margin: 20px auto;
+}
+
+th,
+td {
+	border: 1px solid #ddd;
+	padding: 12px;
+	text-align: left;
+}
+
+th {
+	background-color: #f2f2f2;
+}
+
+tr:nth-child(even) {
+	background-color: #f2f2f2;
+}
+
+tr:hover {
+	background-color: #ddd;
+}
+
+/* Styles for individual stock items */
+.stock-item {
+	background-color: #fff;
+	box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+	margin-bottom: 10px;
+	padding: 20px;
+}
+
+.stock-symbol {
+	font-weight: bold;
+	font-size: 18px;
+}
+
+.stock-price {
+	color: #007bff;
+	font-size: 24px;
+}
+
+.stock-change {
+	color: green;
+}
+
+.stock-change.percent {
+	color: red;
+}
+
+.logout-button {
+	position: absolute;
+	top: 20px;
+	right: 10px;
+
+}
+
+.logout-button a {
+	background-color: #FF5733;
+	color: white;
+	padding: 10px 15px;
+	border-radius: 5px;
+	text-decoration: none;
+	font-weight: bold;
+}
+
+.logout-button a:hover {
+	background-color: #E74C3C;
+}
+
+.footer {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	background-color: #333;
+	color: white;
+	text-align: center;
+	padding: 10px 0;
+}
+
+.linkedin-icon {
+	color: white;
+	text-decoration: none;
+	font-size: 24px;
+	display: block; 
+    margin: 10px auto 0;
+}

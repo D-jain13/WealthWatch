@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Portfolios</title>
+	<link rel="stylesheet" href="/css/styles.css"> <!-- Link to your CSS file -->
+</head>
+
+<body>
+	<h1>Portfolios</h1>
+	<table>
+		<thead>
+			<tr>
+				<th>Name</th>
+				<th>Invested Value</th>
+				<th>Current Value</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="portfolio : ${portfolios}">
+				<td th:text="${portfolio.name}"></td>
+				<td th:text="${portfolio.invested_value}"></td>
+				<td th:text="${portfolio.current_value}"></td>
+			</tr>
+		</tbody>
+	</table>
+</body>
+
+</html>
