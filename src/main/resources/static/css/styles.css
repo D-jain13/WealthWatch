@@ -15,17 +15,10 @@ body {
 	text-align: center;
 }
 
-.login-heading {
-	color: green;
-	margin-top: 10px;
-	font-size: 28px;
-}
-
 .login-box {
 	background-color: #ffffff;
-	padding: 60px;
-	/* Set padding to 60px */
-	border-radius: 10px;
+	padding: 45px;
+	border-radius: 20px;
 	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 	max-width: 400px;
 	margin: 0 auto;
@@ -142,15 +135,15 @@ input[type="password"] {
 }
 
 button {
-	background-color: #007BFF;
+	background-color:#4D4DA8;
 	color: #fff;
-	padding: 15px 30px;
-	/* Increased padding */
+	padding: 13px 25px;
 	border: none;
 	border-radius: 5px;
 	cursor: pointer;
 	font-size: 16px;
 	transition: background-color 0.3s;
+	margin-bottom: 5px;
 }
 
 button:hover {
@@ -209,6 +202,7 @@ a:hover {
 	border-radius: 10px;
 	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 	flex: 1;
+	width: 100%;
 }
 
 .current-value,
@@ -364,6 +358,69 @@ tr:hover {
 	color: white;
 	text-decoration: none;
 	font-size: 24px;
-	display: block; 
-    margin: 10px auto 0;
+	display: block;
+	margin: 10px auto 0;
+}
+
+/* Add this CSS in your stylesheet or within a <style> tag in your HTML */
+.portfolio-button {
+	display: inline-block;
+	padding: 10px 20px;
+	background-color: #007bff;
+	/* Button background color */
+	color: #fff;
+	/* Text color */
+	text-decoration: none;
+	/* Remove underline */
+	border: none;
+	border-radius: 5px;
+	/* Rounded corners */
+	cursor: pointer;
+	transition: background-color 0.3s;
+	/* Smooth color transition on hover */
+}
+
+.portfolio-button:hover {
+	background-color: #0056b3;
+	/* Change color on hover */
+}
+
+.dashboard {
+	background-color: #f7f7f7;
+	font-family: Arial, sans-serif;
+	display: flex;
+	flex-direction: column;
+	/* Ensure the container is a column layout */
+	justify-content: flex-start;
+	/* Align content at the top */
+	align-items: center;
+	/* Center horizontally */
+	min-height: 100vh;
+	/* Minimum height of the viewport */
+	margin: 0;
+	padding: 0;
+}
+
+.container {
+	max-width: 400px;
+	margin: 20px auto;
+	padding: 50px;
+	border-radius: 25px;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+	background-color: white;
+}
+
+input[type="submit"] {
+	background-color: #007BFF;
+	color: white;
+	border: none;
+	border-radius: 3px;
+	padding: 10px 20px;
+	cursor: pointer;
+	font-size: 16px;
+	transition: background-color 0.3s;
+}
+
+input[type="submit"]:hover {
+	background-color: #0056b3;
 }
