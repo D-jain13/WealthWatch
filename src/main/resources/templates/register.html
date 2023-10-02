@@ -8,11 +8,10 @@
 	<link rel="stylesheet" th:href="@{/css/styles.css}" href="/css/styles.css">
 </head>
 
-<body>
+<body class="registration-body">
 	<div class="registration-container">
 		<div class="registration-box">
-			<h2>Register</h2>
-
+			<img src="/logo.png" alt="Company Logo" width="200" height="90">
 			<form th:action="@{/registerSuccess}" method="POST">
 				<div class="input-container">
 					<label for="name">Name:</label>
