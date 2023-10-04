@@ -5,47 +5,27 @@
 	<title>Dashboard</title>
 	<link rel="stylesheet" href="/css/styles.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-
 </head>
 
 <body>
-	<div class="dashboard">
-		<p class="dashboard-welcome">Hello, <span th:text="${username}"></span></p>
-		<header class="top-bar">
-			<div class="top-bar-buttons">
-				<a class="header-button" href="portfolios">Your Portfolios</a>
-				<a class="header-button" href="stocks">Stock</a>
-				<a class="header-button" href="createPortfolio">Create Portfolio</a>
-			</div>
-			<div class="logout-button">
-				<a href="/logout">Logout</a>
-			</div>
-		</header>
-		<div class="dashboard-container">
-			<div class="dashboard-info">
-				<div class="value-box">
-					<p class="current-value">Current Value: $<span th:text="${currentValue}"></span></p>
-					<p class="invested-amount">Invested Value: $<span th:text="${investedAmount}"></span></p>
-					<div class="profit-loss">
-						<!-- Calculate profit or loss using Thymeleaf expressions -->
-						<span
-							th:text="${currentValue > investedAmount ? 'Profit: $' + (currentValue - investedAmount) : 'Loss: $' + (investedAmount - currentValue)}"></span>
-					</div>
-				</div>
-			</div>
+	<header class="topnav">
+		<a class="active" href="/user/dashboard">Dashboard</a>
+		<a href="portfolios">Your Portfolios</a>
+		<a href="stocks">Stock</a>
+		<a href="createPortfolio">Create Portfolio</a>
+		<div class="logout-button">
+			<a href="/logout">Logout</a>
 		</div>
+	</header>
 
-
-		<div class="button-container">
-			<a class="button" href="portfolios">Go to Portfolios</a>
-		</div>
-	</div>
+	<p class="dashboard-welcome">Welcome, <span th:text="${username}"></span>!</p>
+	
 	<div class="footer">
-        Wealth Watch
-        <a class="linkedin-icon" href="https://www.linkedin.com/in/dhairya--jain/" target="_blank">
-            <i class="fab fa-linkedin-in"></i> 
-        </a>
-    </div>
+		Made with <i class="fas fa-heart heart-icon"></i> by <span class="name">Dhairya Jain</span>
+		<a class="linkedin-icon" href="https://www.linkedin.com/in/dhairya--jain/" target="_blank">
+			<i class="fab fa-linkedin-in"></i>
+		</a>
+	</div>
 </body>
 
 </html>

@@ -2,32 +2,36 @@
 <html>
 
 <head>
-    <title>Create Portfolio</title>
-    <link rel="stylesheet" href="/css/styles.css">
+	<title>Create Portfolio</title>
+	<link rel="stylesheet" href="/css/styles.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 </head>
 
 <body>
-	<header class="top-bar">
-			<div class="top-bar-buttons">
-				<a class="header-button" href="portfolios">Your Portfolios</a>
-				<a class="header-button" href="stocks">Stock</a>
-				<a class="header-button" href="createPortfolio">Create Portfolio</a>
-			</div>
-			<div class="logout-button">
-				<a href="/logout">Logout</a>
-			</div>
-		</header>
-    <div class="createportfolio-container">
-        <h1>Create Portfolio</h1>
-        <br>
-        <form action="/user/create-portfolio" method="post">
-            <label for="name">Portfolio Name:</label>
-            <input type="text" id="name" name="name" required>
-            <br><br>
-            <input class="button" type="submit" value="Create">
-        </form>
-        <br>
-        <a href="/user/dashboard">Back to Dashboard</a>
+	<header class="topnav">
+		<a class="active" href="/user/dashboard">Dashboard</a>
+		<a href="portfolios">Your Portfolios</a>
+		<a href="stocks">Stock</a>
+		<a href="createPortfolio">Create Portfolio</a>
+		<div class="logout-button">
+			<a href="/logout">Logout</a>
+		</div>
+	</header>
+	<div class="createportfolio-container">
+		<h1>Create Portfolio</h1>
+		<br>
+		<form action="/user/create-portfolio" method="post">
+			<label for="name">Portfolio Name:</label>
+			<input type="text" id="name" name="name" required>
+			<br><br>
+			<input class="button" type="submit" value="Create">
+		</form>
+	</div>
+	<div class="footer">
+        Made with <i class="fas fa-heart heart-icon"></i>  by <span class="name">Dhairya Jain</span>
+        <a class="linkedin-icon" href="https://www.linkedin.com/in/dhairya--jain/" target="_blank">
+            <i class="fab fa-linkedin-in"></i> 
+        </a>
     </div>
 </body>
 

@@ -3,17 +3,28 @@
 
 <head>
 	<title>Portfolios</title>
-	<link rel="stylesheet" href="/css/styles.css"> <!-- Link to your CSS file -->
+	<link rel="stylesheet" href="/css/styles.css"> 
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 </head>
 
 <body>
-	<h1>Portfolios</h1>
+	<header class="topnav">
+		<a class="active" href="/user/dashboard">Dashboard</a>
+		<a href="portfolios">Your Portfolios</a>
+		<a href="stocks">Stock</a>
+		<a href="createPortfolio">Create Portfolio</a>
+		<div class="logout-button">
+			<a href="/logout">Logout</a>
+		</div>
+	</header>
+	<h1 class="portfolio-heading">Portfolios</h1>
 	<table>
 		<thead>
 			<tr>
 				<th>Name</th>
 				<th>Invested Value</th>
 				<th>Current Value</th>
+				<th>Modify Portfolio</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -21,9 +32,18 @@
 				<td th:text="${portfolio.name}"></td>
 				<td th:text="${portfolio.invested_value}"></td>
 				<td th:text="${portfolio.current_value}"></td>
+				<td>
+                    <a th:href="'/manage/' + ${portfolio.id}" class="portfolio-button">Modify Portfolio</a>
+                </td>
 			</tr>
 		</tbody>
 	</table>
+	<div class="footer">
+        Made with <i class="fas fa-heart heart-icon"></i>  by <span class="name">Dhairya Jain</span>
+        <a class="linkedin-icon" href="https://www.linkedin.com/in/dhairya--jain/" target="_blank">
+            <i class="fab fa-linkedin-in"></i> 
+        </a>
+    </div>
 </body>
 
 </html>

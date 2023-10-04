@@ -20,6 +20,7 @@ body {
 	height: 100vh;
 	margin-top: 15px;
 }
+
 .login-container {
 	text-align: center;
 }
@@ -146,7 +147,7 @@ input[type="password"] {
 }
 
 button {
-	background-color:#4D4DA8;
+	background-color: #4D4DA8;
 	color: #fff;
 	padding: 13px 25px;
 	border: none;
@@ -233,17 +234,34 @@ a:hover {
 	text-align: center;
 }
 
-/* Update styles for the header bar */
-.top-bar {
-	background-color: #E7CD56;
-	color: #fff;
-	padding: 20px 0;
-	text-align: left;
+
+.topnav {
 	position: absolute;
 	top: 0;
 	left: 0;
 	width: 100%;
 	z-index: 1;
+	background-color: black;
+	overflow: hidden;
+}
+
+.topnav a:hover {
+	background-color: #ddd;
+	color: #4D4DA8;
+}
+
+.topnav a {
+	float: left;
+	color: #f2f2f2;
+	text-align: center;
+	padding: 14px 16px;
+	text-decoration: none;
+	font-size: 17px;
+}
+
+.topnav a.active {
+	background-color: darkslateblue;
+	color: white;
 }
 
 .dashboard-container {
@@ -256,25 +274,19 @@ a:hover {
 	margin: 0 auto;
 }
 
-.header-button {
-	background-color: white;
-	color: #7948B8;
-	text-decoration: none;
-	margin: 0 20px;
-	padding: 10px 30px;
-	border-radius: 5px;
-	font-weight: bold;
-	font-size: 18px;
-	transition: background-color 0.3s;
-}
 
 .dashboard-welcome {
+	position: absolute;
+	top: 65px;
+	left: 15px;
+	font-family: Courier New;
 	font-size: 24px;
 	font-weight: bold;
 	margin-bottom: 20px;
 	color: #333;
 	/* Text color for the "Hello, username" message */
 	text-align: left;
+	
 }
 
 /* Adjust styles for the content below the header */
@@ -336,9 +348,8 @@ tr:hover {
 
 .logout-button {
 	position: absolute;
-	top: 20px;
-	right: 10px;
-
+	top: 4px;
+	right: 8px;
 }
 
 .logout-button a {
@@ -359,17 +370,17 @@ tr:hover {
 	bottom: 0;
 	left: 0;
 	width: 100%;
-	background-color: #333;
+	background-color: black;
 	color: white;
 	text-align: center;
-	padding: 10px 0;
+	padding: 15px 0;
 }
 
 .linkedin-icon {
 	color: white;
 	text-decoration: none;
-	font-size: 24px;
-	display: block;
+	font-size: 20px;
+	display: contents;
 	margin: 10px auto 0;
 }
 
@@ -399,16 +410,15 @@ tr:hover {
 .dashboard {
 	background-color: #f7f7f7;
 	font-family: Arial, sans-serif;
-	display: flex;
-	flex-direction: column;
-	/* Ensure the container is a column layout */
-	justify-content: flex-start;
+	display: grid;
+
+	justify-content: normal;
 	/* Align content at the top */
-	align-items: center;
+	align-items: normal;
 	/* Center horizontally */
 	min-height: 100vh;
 	/* Minimum height of the viewport */
-	margin: 0;
+	margin: 10px;
 	padding: 0;
 }
 
@@ -431,7 +441,7 @@ tr:hover {
 }
 
 input[type="submit"] {
-	background-color: #007BFF;
+	background-color: darkslateblue;
 	color: white;
 	border: none;
 	border-radius: 3px;
@@ -443,4 +453,13 @@ input[type="submit"] {
 
 input[type="submit"]:hover {
 	background-color: #0056b3;
+}
+
+.heart-icon {
+	color: red;
+}
+
+.name {
+	display: inline-block;
+	margin-right: 10px;
 }
