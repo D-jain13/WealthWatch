@@ -462,4 +462,46 @@ input[type="submit"]:hover {
 	margin-right: 10px;
 }
 
+.card {
+	position: absolute;
+	top: 118px;
+	left: 10px;
+	border: 1px solid #ddd;
+	border-radius: 5px;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+	padding: 20px;
+	background-color: #fff;
+	width: 48%;
+	height: 360px;
+	margin: 0 auto;
+}
 
+.card-body {
+	font-family: sans-serif;
+	font-weight: bold;
+	font-size: 16px;
+	color: #333;
+}
+
+#pieChart {
+	max-width: 100%;
+	/* Ensure the chart does not exceed the card's width */
+	height: auto;
+	/* Allow the chart's height to adjust proportionally */
+}
+
+.chart-container {
+	width: 100%;
+	/* Ensure the chart container spans the card's width */
+	height: 250px;
+	/* Set a fixed or desired height for the chart container */
+	background-color: aliceblue;
+}
+.profit-text {
+  color: green; /* Set text color to green for profit */
+}
+
+/* Define styles for loss text */
+.loss-text {
+  color: red; /* Set text color to red for loss */
+}
