@@ -18,8 +18,27 @@
 		</div>
 	</header>
 
-	<p class="dashboard-welcome">Welcome, <span th:text="${username}"></span>!</p>
-	
+	<p class="dashboard-welcome"><span id="animated-text"></span></p>
+	<script th:inline="javascript">
+
+		var username = /*[[${username}]]*/ '';
+		var animatedText = document.getElementById("animated-text");
+		var welcomeText = "Welcome, " + username + "!";
+
+		var index = 0;
+		var interval = 150;
+
+		function revealText() {
+			if (index < welcomeText.length) {
+				animatedText.innerHTML += welcomeText.charAt(index);
+				index++;
+				setTimeout(revealText, interval);
+			}
+		}
+
+		revealText();
+	</script>
+
 	<div class="footer">
 		Made with <i class="fas fa-heart heart-icon"></i> by <span class="name">Dhairya Jain</span>
 		<a class="linkedin-icon" href="https://www.linkedin.com/in/dhairya--jain/" target="_blank">
