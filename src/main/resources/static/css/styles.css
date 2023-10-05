@@ -158,6 +158,18 @@ button {
 	margin-bottom: 5px;
 }
 
+.stock-button {
+	background-color: #4D4DA8;
+	color: #fff;
+	padding: 10px 20px;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+	font-size: 16px;
+	transition: background-color 0.3s;
+	margin-bottom: 5px;
+}
+
 button:hover {
 	background-color: #0056b3;
 }
@@ -294,23 +306,41 @@ h1 {
 }
 
 table {
+	position: absolute;
+	top: 115px;
+	left: 20px;
 	border-collapse: collapse;
-	width: 80%;
+	width: 95%;
 	margin: 20px auto;
 }
 
-th,
-td {
-	border: 1px solid #ddd;
-	padding: 12px;
-	text-align: left;
+th {
+	font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+	background-color: black;
+	/* Background color for header cells */
+	color: #fff;
+	/* Text color for header cells */
+	font-weight: bold;
+	padding: 10px;
+	text-align: center;
+	border-bottom: 1px solid #ddd;
 }
 
-th {
-	background-color: #f2f2f2;
+td {
+	border-bottom: 1px solid #ddd;
+	border: 1px solid #ccc;
+	padding: 10px;
+
+}
+
+tr {
+	font-family: Arial, Helvetica, sans-serif;
+	text-transform: capitalize;
+	text-align: center;
 }
 
 tr:nth-child(even) {
+	text-align: center;
 	background-color: #f2f2f2;
 }
 
@@ -386,7 +416,7 @@ tr:hover {
 .portfolio-button {
 	display: inline-block;
 	padding: 10px 20px;
-	background-color: #007bff;
+	background-color: darkslateblue;
 	/* Button background color */
 	color: #fff;
 	/* Text color */
@@ -497,11 +527,51 @@ input[type="submit"]:hover {
 	/* Set a fixed or desired height for the chart container */
 	background-color: aliceblue;
 }
+
 .profit-text {
-  color: green; /* Set text color to green for profit */
+	color: green;
+	/* Set text color to green for profit */
 }
 
 /* Define styles for loss text */
 .loss-text {
-  color: red; /* Set text color to red for loss */
+	color: red;
+	/* Set text color to red for loss */
+}
+
+.portfolio-heading {
+	position: absolute;
+	top: 55px;
+	left: 10px;
+	text-align: left;
+	font-size: 36px;
+	color: #333;
+	margin-top: 20px;
+	text-transform: uppercase;
+	font-weight: bold;
+	letter-spacing: 1px;
+}
+
+select {
+	padding: 5px;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	width: 75%;
+	/* Make the dropdown full width of its container */
+	background-color: #fff;
+	font-size: 14px;
+}
+
+/* Style the dropdown options */
+select option {
+	font-size: 14px;
+}
+
+input[type="number"] {
+	width: 90px;
+	/* Adjust the width as needed */
+	height: 10px;
+	/* Adjust the height as needed */
+	padding: 5px;
+	/* Add padding for better appearance */
 }

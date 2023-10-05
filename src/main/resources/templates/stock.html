@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
-    <title>Stocks</title>
-    <link rel="stylesheet"  href="/css/styles.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+	<title>Stocks</title>
+	<link rel="stylesheet" href="/css/styles.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 </head>
+
 <body>
 	<header class="topnav">
 		<a class="active" href="/user/dashboard">Dashboard</a>
@@ -15,8 +17,8 @@
 			<a href="/logout">Logout</a>
 		</div>
 	</header>
-    <h1>Stock Details</h1>
-    <table>
+	<h1 class="portfolio-heading">List Of Stocks</h1>
+	<table>
 		<thead>
 			<tr>
 				<th>Symbol</th>
@@ -24,6 +26,9 @@
 				<th>Previous Close</th>
 				<th>Change</th>
 				<th>Percent Change</th>
+				<th>Select Portfolio</th>
+				<th>Quantity</th>
+				<th>Add To Portfolio</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -33,14 +38,28 @@
 				<td th:text="${stock.prevClose}"></td>
 				<td th:text="${stock.change}"></td>
 				<td th:text="${stock.changePercent}"></td>
+				<td>
+					<select>
+						<option value="" disabled selected>Select Portfolio</option>
+						<!-- Iterate over user's portfolios and generate options with portfolio names -->
+						<option th:each="portfolio: ${portfolios}" th:text="${portfolio.name}"></option>
+					</select>
+				</td>
+				<td>
+					<input type="number" name="quantity" placeholder="Quantity">
+				</td>
+				<td>
+					<a href="/user/dashboard" class="stock-button">Add</a>
+				</td>
 			</tr>
 		</tbody>
 	</table>
 	<div class="footer">
-        Made with <i class="fas fa-heart heart-icon"></i>  by <span class="name">Dhairya Jain</span>
-        <a class="linkedin-icon" href="https://www.linkedin.com/in/dhairya--jain/" target="_blank">
-            <i class="fab fa-linkedin-in"></i> 
-        </a>
-    </div>
+		Made with <i class="fas fa-heart heart-icon"></i> by <span class="name">Dhairya Jain</span>
+		<a class="linkedin-icon" href="https://www.linkedin.com/in/dhairya--jain/" target="_blank">
+			<i class="fab fa-linkedin-in"></i>
+		</a>
+	</div>
 </body>
+
 </html>
