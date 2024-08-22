@@ -1,6 +1,5 @@
 package com.Dhairya.WealthWatch.entity;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.persistence.Column;
@@ -8,84 +7,39 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
+@Getter
+@Setter
 public class Portfolio {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	@GeneratedValue(strategy = GenerationType.UUID)
+	private String id;
 	
-	@Column(name="userEmail",nullable=false)
-	private String userEmail;
-	
-	@Column(name="name",nullable=false)
+	@Column(nullable=false)
 	private String name;
 	
-	@Column(name="invested_value",columnDefinition = "double default 0.0")
+	@Column(columnDefinition = "DOUBLE PRECISION DEFAULT 0.0")
 	private double invested_value;
 	
-	@Column(name="current_value",columnDefinition = "double default 0.0")
+	@Column(columnDefinition = "DOUBLE PRECISION DEFAULT 0.0")
 	private double current_value;
 	
-	@Column(name="stock_id",unique=true)
-	private List<String> stocks;
+	@ManyToMany
+	@JoinTable(name = "stock_portfolio_table",
+				joinColumns = @JoinColumn(name = "portfolio_id"),
+				inverseJoinColumns = @JoinColumn(name = "stock_name")
+	)
+	private List<Stock> stocks;
 
-	public Long getId() {
-		return id;
-	}
-	
-	
-	public String getUserEmail() {
-		return userEmail;
-	}
-
-
-	public void setUserEmail(String userEmail) {
-		this.userEmail = userEmail;
-	}
-
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-	public double getInvested_value() {
-		return invested_value;
-	}
-
-	public void setInvested_value(Double invested_value) {
-		this.invested_value = invested_value;
-	}
-
-	public double getCurrent_value() {
-		return current_value;
-	}
-
-	public void setCurrent_value(Double current_value) {
-		this.current_value = current_value;
-	}
-
-	public Portfolio(Long id, String name) {
-		super();
-		this.id = id;
-		this.name = name;
-		this.stocks = new ArrayList<>();
-	}
-
-	public Portfolio() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-
-	
-	
-	
+	@ManyToOne
+	@JoinColumn(referencedColumnName = "email",nullable = false)
+	private User user;
 }
