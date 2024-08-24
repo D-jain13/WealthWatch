@@ -13,7 +13,11 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import com.Dhairya.WealthWatch.entity.Stock;
+import com.Dhairya.WealthWatch.entity.StockResponse;
 import com.Dhairya.WealthWatch.repository.StockRepo;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 
 @Service
 public class AlphaVantageService {
@@ -23,14 +27,14 @@ public class AlphaVantageService {
 
 	@Autowired
 	private StockRepo stockRepo;
-
+	
 	@Autowired
-	private StockConvertor stockConvertor;
-
+	private ObjectMapper mapper;
+	
 	private int startIndex = 0;
 	private int dailyCount = 0;
 
-	//@Scheduled(cron = "0 0 1 * * ?")
+	@Scheduled(cron = "0 0 1 * * ?")
 	public void getStockQuoteAutomatically() {
 		if (isDayChanged()) {
             dailyCount = 0;
@@ -41,7 +45,7 @@ public class AlphaVantageService {
 		}
 	}
 
-	//@Scheduled(fixedDelay = 60000)
+	@Scheduled(fixedDelay = 60000)
 	public void getStockQuoteAutomaticallyEvery5Minute() {
 		if (dailyCount < 50) {
 			getStockQuote();
@@ -76,11 +80,13 @@ public class AlphaVantageService {
 
 			try {
 				HttpResponse<String> response = httpClient.send(httpRequest, HttpResponse.BodyHandlers.ofString());
+				
 				if (response.statusCode() == 200) {
 					String jsonResponse = response.body();
-					Stock stock = StockConvertor.convertJsonToStock(jsonResponse);
-					System.out.println(symbol);
-					stockRepo.save(stock);
+				
+					StockResponse stockRes = mapper.readValue(jsonResponse, StockResponse.class);
+					
+					stockRepo.save(stockRes.getStock());
 
 					dailyCount++;
 				}

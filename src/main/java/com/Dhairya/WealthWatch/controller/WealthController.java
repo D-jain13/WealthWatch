@@ -26,6 +26,7 @@ import com.Dhairya.WealthWatch.service.RegistrationService;
 import jakarta.servlet.http.HttpSession;
 
 @Controller
+@RequestMapping("/user")
 public class WealthController {
 	
 	@Autowired
@@ -43,56 +44,18 @@ public class WealthController {
 	@Autowired
 	private PortfolioRepo portfolioRepo;
 	
-	@GetMapping("/")
-	public String redirectToLogin() {
-		return "redirect:/login";
-	}
-	
-	@GetMapping("/login")
-	public String showLogin() {
-		return "login";
-	}
-	
-	@PostMapping("/login")
-	public String login() {
-		return "redirect:/loginSuccess";
-	}
-	
-	@GetMapping("/register")
-	public String showRegister() {
-		return "register";
-	}
-	
-	@PostMapping("/loginSuccess")
-	public String showLoginSucess() {
-		return "loginSuccess";
-	}
-	
-	@PostMapping("/registerSuccess")
-	public String showRegisterSucess(User user,Model model) {
-		try {
-			registrationService.registration(user);
-			return "registerSuccess";
-		}
-		catch (RegistrationException e) {
-			model.addAttribute("errorMessage", e.getMessage());	
-			return "registrationError";
-		}
-		
-	}
-	
-	@GetMapping("/user/dashboard")
+	@GetMapping("/dashboard")
 	public String showDashboard(Model model) {
 //		List<StockQuote> stockQuotes = alphaService.getStockQuote();
 //		model.addAttribute("stockQuotes", stockQuotes);
-		String email = name();
+		String email = getAuthentication();
 		
 		Optional<User> user = userRepo.findByEmail(email);
-		
+		 
 		if(user.isPresent()) {
-			model.addAttribute("username",user.get().getName());
-			model.addAttribute("currentValue",user.get().getCurrent());
-			model.addAttribute("investedAmount",user.get().getInvested());
+			model.addAttribute("username",user.get().getFull_name());
+			model.addAttribute("currentValue",user.get().getTotal_current_value());
+			model.addAttribute("investedAmount",user.get().getTotal_invested_value());
 		}
 		else {
 			model.addAttribute("currentValue", 0.0);
@@ -102,34 +65,38 @@ public class WealthController {
 		return "dashboard";
 	}
 	
-	@GetMapping("/user/portfolios")
+	@GetMapping("/portfolios")
 	private String listAllPortfolios(Model model) {
-		List<Portfolio> portfolios = portfolioRepo.findAllByUserEmail(name());
+		List<Portfolio> portfolios = portfolioRepo.findAllByUserEmail(getAuthentication());
 		model.addAttribute("portfolios", portfolios);
 		return "portfolios";
 	}
 	
-	@GetMapping("/user/stocks")
+	@GetMapping("/stocks")
 	private String listAllStock(Model model ) {
 		List<Stock> list = stockRepo.findAll();
 		model.addAttribute("Stocks", list);
 		return "stock";
 	}
 	
-	@GetMapping("/user/createPortfolio")
+	@GetMapping("/createPortfolio")
 	private String loadCreatePortfolioPage() {
 		return "createPortfolio";
 	}
 	
-	@PostMapping("/user/create-portfolio")
+	@PostMapping("/create-portfolio")
 	private String portfolioCreater(Portfolio portfolio) {
-		String userEmail = name();
-		portfolio.setUserEmail(userEmail);
+		
+		String email = getAuthentication();
+		
+		Optional<User> user = userRepo.findByEmail(email);
+		
+		portfolio.setUser(user.get());
 		portfolioRepo.save(portfolio);
 		return "redirect:/user/dashboard";
 	}
 	
-	private String name() {
+	private String getAuthentication() {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		return authentication.getName();
 	}
