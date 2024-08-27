@@ -8,15 +8,7 @@
 </head>
 
 <body>
-	<header class="topnav">
-		<a class="active" href="/user/dashboard">Dashboard</a>
-		<a href="portfolios">Your Portfolios</a>
-		<a href="stocks">Stock</a>
-		<a href="createPortfolio">Create Portfolio</a>
-		<div class="logout-button">
-			<a href="/logout">Logout</a>
-		</div>
-	</header>
+	  <div th:replace="header :: header"></div>
 	<div class="createportfolio-container">
 		<h1>Create Portfolio</h1>
 		<br>
@@ -27,12 +19,7 @@
 			<input class="button" type="submit" value="Create">
 		</form>
 	</div>
-	<div class="footer">
-        Made with <i class="fas fa-heart heart-icon"></i>  by <span class="name">Dhairya Jain</span>
-        <a class="linkedin-icon" href="https://www.linkedin.com/in/dhairya--jain/" target="_blank">
-            <i class="fab fa-linkedin-in"></i> 
-        </a>
-    </div>
+	 <div th:replace="footer :: footer"></div>
 </body>
 
 </html>

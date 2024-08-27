@@ -1,49 +1,34 @@
 <!DOCTYPE html>
 <html>
-
 <head>
-	<title>Portfolios</title>
-	<link rel="stylesheet" href="/css/styles.css"> 
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <title>Portfolios</title>
+    <link rel="stylesheet" href="/css/styles.css"> 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 </head>
-
 <body>
-	<header class="topnav">
-		<a class="active" href="/user/dashboard">Dashboard</a>
-		<a href="portfolios">Your Portfolios</a>
-		<a href="stocks">Stock</a>
-		<a href="createPortfolio">Create Portfolio</a>
-		<div class="logout-button">
-			<a href="/logout">Logout</a>
-		</div>
-	</header>
-	<h1 class="portfolio-heading">Portfolios</h1>
-	<table>
-		<thead>
-			<tr>
-				<th>Name</th>
-				<th>Invested Value</th>
-				<th>Current Value</th>
-				<th>Modify Portfolio</th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr th:each="portfolio : ${portfolios}">
-				<td th:text="${portfolio.name}"></td>
-				<td th:text="${portfolio.invested_value}"></td>
-				<td th:text="${portfolio.current_value}"></td>
-				<td>
-                    <a th:href="'/manage/' + ${portfolio.id}" class="portfolio-button">Modify Portfolio</a>
-                </td>
-			</tr>
-		</tbody>
-	</table>
-	<div class="footer">
-        Made with <i class="fas fa-heart heart-icon"></i>  by <span class="name">Dhairya Jain</span>
-        <a class="linkedin-icon" href="https://www.linkedin.com/in/dhairya--jain/" target="_blank">
-            <i class="fab fa-linkedin-in"></i> 
-        </a>
-    </div>
-</body>
+    <div th:replace="header :: header"></div>
+    <h1 class="portfolio-heading">Portfolios</h1>
 
+    <div class="portfolio-container">
+        <div class="header">
+            <div>Portfolio Name</div>
+            <div>Value</div>
+            <div>Return Percentage</div>
+        </div>
+
+        <div th:each="portfolio : ${portfolios}" class="portfolio-card" th:data-url="@{'/user/portfolio/' + ${portfolio.id}}"
+     onclick="window.location.href=this.getAttribute('data-url')">
+            <div class="portfolio-name" th:text="${portfolio.name}"></div>
+            <div class="portfolio-values">
+                <p th:text="'Current Value: $' + ${portfolio.current_value}"></p>
+                <p th:text="'Invested Value: $' + ${portfolio.invested_value}"></p>
+            </div>
+            <div class="portfolio-return" 
+                 th:classappend="${(portfolio.current_value - portfolio.invested_value) < 0} ? 'negative-return' : 'positive-return'"
+                 th:text="'Return: ' + ${#numbers.formatDecimal((portfolio.current_value - portfolio.invested_value) * 100.0 / portfolio.invested_value, 1, 2)} + '%'"></div>
+        </div>
+    </div>
+
+     <div th:replace="footer :: footer"></div>
+</body>
 </html>

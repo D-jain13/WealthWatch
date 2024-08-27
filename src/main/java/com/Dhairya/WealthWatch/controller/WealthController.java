@@ -44,6 +44,7 @@ public class WealthController {
 	@Autowired
 	private PortfolioRepo portfolioRepo;
 	
+	
 	@GetMapping("/dashboard")
 	public String showDashboard(Model model) {
 //		List<StockQuote> stockQuotes = alphaService.getStockQuote();
@@ -66,26 +67,28 @@ public class WealthController {
 	}
 	
 	@GetMapping("/portfolios")
-	private String listAllPortfolios(Model model) {
+	public String listAllPortfolios(Model model) {
 		List<Portfolio> portfolios = portfolioRepo.findAllByUserEmail(getAuthentication());
 		model.addAttribute("portfolios", portfolios);
 		return "portfolios";
 	}
 	
+	
 	@GetMapping("/stocks")
-	private String listAllStock(Model model ) {
+	public String listAllStock(Model model ) {
 		List<Stock> list = stockRepo.findAll();
+		System.out.println(list.toString());
 		model.addAttribute("Stocks", list);
 		return "stock";
 	}
 	
 	@GetMapping("/createPortfolio")
-	private String loadCreatePortfolioPage() {
+	public String loadCreatePortfolioPage() {
 		return "createPortfolio";
 	}
 	
 	@PostMapping("/create-portfolio")
-	private String portfolioCreater(Portfolio portfolio) {
+	public String portfolioCreater(Portfolio portfolio) {
 		
 		String email = getAuthentication();
 		
@@ -94,6 +97,13 @@ public class WealthController {
 		portfolio.setUser(user.get());
 		portfolioRepo.save(portfolio);
 		return "redirect:/user/dashboard";
+	}
+	
+	@GetMapping("/portfolio/{id}")
+	public String showPortfolioDetails(@PathVariable String id,Model model) {
+		Portfolio portfolio = portfolioRepo.findById(id).get();
+		model.addAttribute("portfolio", portfolio);
+		return "showPortfolio";
 	}
 	
 	private String getAuthentication() {

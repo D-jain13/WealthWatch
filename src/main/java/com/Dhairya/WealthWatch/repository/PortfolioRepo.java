@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import com.Dhairya.WealthWatch.entity.Portfolio;
 
 @Repository
-public interface PortfolioRepo extends JpaRepository<Portfolio, Long> {
+public interface PortfolioRepo extends JpaRepository<Portfolio, String> {
 
 	List<Portfolio> findAllByUserEmail(String userEmail);
 }

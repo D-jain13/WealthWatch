@@ -9,6 +9,8 @@ import java.util.GregorianCalendar;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
@@ -34,7 +36,10 @@ public class AlphaVantageService {
 	private int startIndex = 0;
 	private int dailyCount = 0;
 
-	@Scheduled(cron = "0 0 1 * * ?")
+	String[] stockSymbols = { "AAPL", "AMZN", "ABBV", "ADBE", "AMD", "BMY", "COST", "CVX", "DIS", "HD", "JNJ", "JPM",
+			"KO", "MA", "META", "MSFT", "MRK", "NVDA", "PEP", "PG", "PYPL", "UNH", "UNP", "VZ", "WMT" };
+
+	//@Scheduled(cron = "0 0 1 * * ?")
 	public void getStockQuoteAutomatically() {
 		if (isDayChanged()) {
             dailyCount = 0;
@@ -45,7 +50,7 @@ public class AlphaVantageService {
 		}
 	}
 
-	@Scheduled(fixedDelay = 60000)
+	//@Scheduled(fixedDelay = 60000)
 	public void getStockQuoteAutomaticallyEvery5Minute() {
 		if (dailyCount < 50) {
 			getStockQuote();
@@ -59,11 +64,10 @@ public class AlphaVantageService {
         return currentDay != dailyCount;
     }
 	
-	String[] stockSymbols = { "AAPL", "AMZN", "ABBV", "ADBE", "AMD", "BMY", "COST", "CVX", "DIS", "HD", "JNJ", "JPM",
-			"KO", "MA", "META", "MSFT", "MRK", "NVDA", "PEP", "PG", "PYPL", "UNH", "UNP", "VZ", "WMT" };
-
+	
+	@Cacheable(value = "stocks" , key = "#symbol")
 	public void getStockQuote() {
-		int batchSize = 5; // Define the batch size
+		int batchSize = 5; 
 		int symbolsToProcess = Math.min(batchSize, stockSymbols.length - startIndex);
 
 		for (int i = startIndex; i < startIndex + symbolsToProcess; i++) {
@@ -72,6 +76,7 @@ public class AlphaVantageService {
 			}
 
 			String symbol = stockSymbols[i];
+			
 			String apiUrl = "https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=" + symbol + "&apikey="
 					+ apiKey;
 
@@ -87,7 +92,7 @@ public class AlphaVantageService {
 					StockResponse stockRes = mapper.readValue(jsonResponse, StockResponse.class);
 					
 					stockRepo.save(stockRes.getStock());
-
+					
 					dailyCount++;
 				}
 			} catch (Exception e) {

@@ -2,27 +2,22 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
-	<title>Dashboard</title>
-	<link rel="stylesheet" href="/css/styles.css">
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+<title>Dashboard</title>
+<link rel="stylesheet" href="/css/styles.css">
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 </head>
 
 <body>
-	<header class="topnav">
-		<a class="active" href="/user/dashboard">Dashboard</a>
-		<a href="portfolios">Your Portfolios</a>
-		<a href="stocks">Stock</a>
-		<a href="createPortfolio">Create Portfolio</a>
-		<div class="logout-button">
-			<a href="/logout">Logout</a>
-		</div>
-	</header>
+	<div th:replace="header :: header"></div>
 
-	<p class="dashboard-welcome"><span id="animated-text"></span></p>
+	<p class="dashboard-welcome">
+		<span id="animated-text"></span>
+	</p>
 	<script th:inline="javascript">
-
-		var username = /*[[${username}]]*/ '';
+		var username = /*[[${username}]]*/'';
 		var animatedText = document.getElementById("animated-text");
 		var welcomeText = "Welcome, " + username + "!";
 
@@ -43,11 +38,15 @@
 
 	<div class="card">
 		<div class="card-body">
-			<p class="current-value">Current Value: $<span th:text="${currentValue}" id="currentValue"></span></p>
-			<p class="invested-amount">Invested Value: $<span th:text="${investedAmount}" id="investedAmount"></span>
+			<p class="current-value">
+				Current Value: $<span th:text="${currentValue}" id="currentValue"></span>
 			</p>
-			<p class="profit-loss-info" 
-    th:classappend=" ${currentValue > investedAmount} ? 'profit-text' : 'loss-text'">
+			<p class="invested-amount">
+				Invested Value: $<span th:text="${investedAmount}"
+					id="investedAmount"></span>
+			</p>
+			<p class="profit-loss-info"
+				th:classappend=" ${currentValue > investedAmount} ? 'profit-text' : 'loss-text'">
 				<span
 					th:text="${currentValue > investedAmount ? 'Profit: $' + (currentValue - investedAmount) : 'Loss: $' + (investedAmount - currentValue)}"></span>
 			</p>
@@ -58,60 +57,56 @@
 			</div>
 			<script>
 				// Replace these values with your actual data
-				const currentValue = parseFloat(document.getElementById('currentValue').textContent);
-				const investedAmount = parseFloat(document.getElementById('investedAmount').textContent);
+				const currentValue = parseFloat(document
+						.getElementById('currentValue').textContent);
+				const investedAmount = parseFloat(document
+						.getElementById('investedAmount').textContent);
 
 				const card = document.querySelector('.card-body');
 				const chartCanvas = document.getElementById('pieChart');
 
 				// Calculate the desired width and height for the chart
 				const desiredWidth = card.clientWidth; // Adjust this if needed
-				const desiredHeight = 250; // Adjust this if needed
+				const desiredHeight = 230; // Adjust this if needed
 
 				// Set the canvas size based on the desired width and height
 				chartCanvas.width = desiredWidth;
 				chartCanvas.height = desiredHeight;
 
 				const pieData = {
-					labels: ["Current Value", "Invested Amount"],
-					datasets: [
-						{
-							label: "Amount",
-							data: [currentValue, investedAmount],
-							backgroundColor: ["#483d8b", "#FFD700"],
-							borderColor: ["#800080", "#FFD700"],
-							borderWidth: 1,
-						},
-					],
+					labels : [ "Current Value", "Invested Amount" ],
+					datasets : [ {
+						label : "Amount",
+						data : [ currentValue, investedAmount ],
+						backgroundColor : [ "#483d8b", "#FFD700" ],
+						borderColor : [ "#483d8b", "#FFD700" ],
+						borderWidth : 1,
+					}, ],
+					hoverOffset : 4
 				};
 
 				const pieOptions = {
-					responsive: false,
-					plugins: {
-						legend: {
-							position: 'bottom',
+					responsive : false,
+					plugins : {
+						legend : {
+							position : 'bottom',
 						},
 					},
 				};
 
-				const ctxPie = chartCanvas.getContext('2d');;
+				const ctxPie = chartCanvas.getContext('2d');
+				;
 				const myPieChart = new Chart(ctxPie, {
-					type: 'pie',
-					data: pieData,
-					options: pieOptions,
+					type : 'doughnut',
+					data : pieData,
+					options : pieOptions,
 				});
-
 			</script>
 
 		</div>
 	</div>
 
-	<div class="footer">
-		Made with <i class="fas fa-heart heart-icon"></i> by <span class="name">Dhairya Jain</span>
-		<a class="linkedin-icon" href="https://www.linkedin.com/in/dhairya--jain/" target="_blank">
-			<i class="fab fa-linkedin-in"></i>
-		</a>
-	</div>
+	 <div th:replace="footer :: footer"></div>
 </body>
 
 </html>

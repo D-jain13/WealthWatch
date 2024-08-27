@@ -31,7 +31,7 @@ public class SecurityConfig {
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 		http
 		.authorizeHttpRequests((authorize)-> authorize
-				.requestMatchers("/login","/register","/css/**").permitAll()
+				.requestMatchers("/login","/register","/static/**").permitAll()
 				.requestMatchers("/**").permitAll()
 				.requestMatchers("/user/**")
 				.anonymous()
@@ -49,7 +49,8 @@ public class SecurityConfig {
 	                .logoutSuccessUrl("/login")
 	                )
 			
-			 .csrf().disable();
+			 .csrf().disable()
+			.cors().disable();
 		
 		return http.build();
 	}

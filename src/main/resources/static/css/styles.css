@@ -232,7 +232,7 @@ a:hover {
 .current-value,
 .invested-amount,
 .profit-loss {
-	margin-bottom: 10px;
+	margin-bottom: -10px;
 }
 
 .profit-loss {
@@ -328,7 +328,7 @@ th {
 
 td {
 	border-bottom: 1px solid #ddd;
-	border: 1px solid #ccc;
+	border: none;
 	padding: 10px;
 
 }
@@ -501,9 +501,10 @@ input[type="submit"]:hover {
 	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 	padding: 20px;
 	background-color: #fff;
-	width: 48%;
-	height: 360px;
+	width: 46%;
+	height: auto;
 	margin: 0 auto;
+	margin-bottom: auto;
 }
 
 .card-body {
@@ -516,7 +517,7 @@ input[type="submit"]:hover {
 #pieChart {
 	max-width: 100%;
 	/* Ensure the chart does not exceed the card's width */
-	height: auto;
+	height: 200px;
 	/* Allow the chart's height to adjust proportionally */
 }
 
@@ -525,7 +526,7 @@ input[type="submit"]:hover {
 	/* Ensure the chart container spans the card's width */
 	height: 250px;
 	/* Set a fixed or desired height for the chart container */
-	background-color: aliceblue;
+	background-color: transparent;
 }
 
 .profit-text {
@@ -574,4 +575,106 @@ input[type="number"] {
 	/* Adjust the height as needed */
 	padding: 5px;
 	/* Add padding for better appearance */
+}
+
+
+
+
+
+
+
+
+
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 20px;
+}
+
+.portfolio-table {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    border-collapse: collapse;
+}
+
+.portfolio-table tr {
+    margin-bottom: 20px;
+}
+
+.portfolio-table td {
+    padding: 10px;
+}
+
+.portfolio-card {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    align-items: center;
+    margin: 15px 0;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease;
+}
+
+.portfolio-name {
+    font-size: 1.2em;
+    color: #333;
+    text-align: left;
+}
+
+.portfolio-values {
+    text-align: center;
+}
+
+.portfolio-values p {
+    margin: 5px 0;
+    color: #666;
+}
+
+.portfolio-return {
+    font-size: 1.2em;
+    color: green;
+    text-align: right;
+}
+
+.portfolio-card:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+
+.negative-return {
+    color: red;
+}
+
+.positive-return {
+    color: green;
+}
+
+
+tbody tr.portfolio-card {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    transition: box-shadow 0.3s ease;
+}
+
+.portfolio-container {
+    width: 90%;
+    margin: 0 auto;
+}
+
+.header {
+    display: grid;
+    grid-template-columns: 1.7fr 1.4fr 1fr;
+    align-items: center;
+    background-color: black;
+    color: white;
+    padding: 15px;
+    font-weight: bold;
+    margin-bottom: 20px;
 }
