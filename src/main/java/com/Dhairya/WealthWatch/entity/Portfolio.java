@@ -11,6 +11,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -20,7 +21,7 @@ import lombok.Setter;
 public class Portfolio {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.UUID)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private String id;
 	
 	@Column(nullable=false)
@@ -32,12 +33,8 @@ public class Portfolio {
 	@Column(columnDefinition = "DOUBLE PRECISION DEFAULT 0.0")
 	private double current_value;
 	
-	@ManyToMany
-	@JoinTable(name = "stock_portfolio_table",
-				joinColumns = @JoinColumn(name = "portfolio_id"),
-				inverseJoinColumns = @JoinColumn(name = "stock_name")
-	)
-	private List<Stock> stocks;
+	@OneToMany(mappedBy = "portfolio")
+	private List<StockPortfolio> stockPortfolios;
 
 	@ManyToOne
 	@JoinColumn(referencedColumnName = "email",nullable = false)

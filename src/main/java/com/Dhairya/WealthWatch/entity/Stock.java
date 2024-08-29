@@ -10,6 +10,7 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -41,7 +42,7 @@ public class Stock {
 	@JsonProperty("10. change percent")
 	private String change_percent;
 
-	@ManyToMany(mappedBy = "stocks")
+	@OneToMany(mappedBy = "stock")
 	@JsonIgnore
-	private List<Portfolio> portfolios;
+	private List<StockPortfolio> stockPortfolios;
 }
