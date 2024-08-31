@@ -1,6 +1,5 @@
 package com.Dhairya.WealthWatch.controller;
 
-import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.Dhairya.WealthWatch.entity.Portfolio;
 import com.Dhairya.WealthWatch.entity.Stock;
+import com.Dhairya.WealthWatch.entity.StockPortfolio;
 import com.Dhairya.WealthWatch.entity.User;
 import com.Dhairya.WealthWatch.repository.UserRepo;
 import com.Dhairya.WealthWatch.service.PortfolioService;
@@ -38,11 +38,24 @@ public class WealthController {
 	private PortfolioService portfolioService;
 
 	@GetMapping("/test/{id}")
-	public String testPage(@PathVariable String id,Model model) {
-		Portfolio portfolio = portfolioService.getPortfolioDetails(id);
-		model.addAttribute("portfolio", portfolio);
+	public String testPage(@PathVariable String id, @RequestParam(defaultValue = "0") int page,  // default to first page
+	        @RequestParam(defaultValue = "3") int size,Model model) {
+	        Portfolio portfolio = portfolioService.getPortfolioDetails(id);
+
+	        // Fetch the paginated stocks for the portfolio
+	        Page<StockPortfolio> stockPage = portfolioService.getPaginatedStockPortfolios(id, page, size);
+
+	        model.addAttribute("portfolio", portfolio);
+	        model.addAttribute("stockPage", stockPage);
 		return "test";
 	}
+	
+	@GetMapping("/test2")
+	public String testPage2(Model model) {
+		
+		return "test2";
+	}
+
 
 	@GetMapping("/dashboard")
 	public String showDashboard(Model model) {
@@ -50,14 +63,10 @@ public class WealthController {
 
 		Optional<User> user = userRepo.findByEmail(email);
 
-		if (user.isPresent()) {
 			model.addAttribute("username", user.get().getFull_name());
 			model.addAttribute("currentValue", user.get().getTotal_current_value());
 			model.addAttribute("investedAmount", user.get().getTotal_invested_value());
-		} else {
-			model.addAttribute("currentValue", 0.0);
-			model.addAttribute("investedAmount", 0.0);
-		}
+		
 
 		return "dashboard";
 	}
@@ -100,9 +109,15 @@ public class WealthController {
 	}
 
 	@GetMapping("/portfolio/{id}")
-	public String showPortfolioDetails(@PathVariable String id, Model model) {
+	public String showPortfolioDetails(@PathVariable String id, @RequestParam(defaultValue = "0") int page,  // default to first page
+	        @RequestParam(defaultValue = "3") int size,Model model) {
 		Portfolio portfolio = portfolioService.getPortfolioDetails(id);
-		model.addAttribute("portfolio", portfolio);
+
+        // Fetch the paginated stocks for the portfolio
+        Page<StockPortfolio> stockPage = portfolioService.getPaginatedStockPortfolios(id, page, size);
+
+        model.addAttribute("portfolio", portfolio);
+        model.addAttribute("stockPage", stockPage);
 		return "showPortfolio";
 	}
 

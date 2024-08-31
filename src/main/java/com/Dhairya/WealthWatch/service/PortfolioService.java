@@ -6,6 +6,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
@@ -46,6 +47,11 @@ public class PortfolioService {
 		}
 	}
 
+	public Page<StockPortfolio> getPaginatedStockPortfolios(String portfolioId, int page, int size) {
+	    Pageable pageable = PageRequest.of(page, size);
+	    return stockPortfolioRepo.findByPortfolioId(portfolioId, pageable);
+	}
+
 	public void createNewPortfolio(Portfolio portfolio, String email) {
 		Optional<User> user = userRepo.findByEmail(email);
 		portfolio.setUser(user.get());
@@ -62,7 +68,10 @@ public class PortfolioService {
 		stockPortfolio.setStock(stock);
 		stockPortfolio.setQuantity(quantity);
 		stockPortfolio.setDate(LocalDate.now());
+		Double current_value = portfolio.get().getCurrent_value();
+		current_value += stock.getPrice() * quantity;
 		
+		portfolio.get().setInvested_value(current_value);
 		stockPortfolioRepo.save(stockPortfolio);
 	}
 

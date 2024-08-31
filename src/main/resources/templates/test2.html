@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Wealth Watch - Your Fintech Companion</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+          crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: 'Arial', sans-serif;
+        }
+
+        .navbar {
+            background-color: #007bff;
+        }
+
+        .navbar-brand {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: white;
+        }
+
+        .hero-section {
+            background-image: url('https://source.unsplash.com/1600x900/?finance,investment');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 100px 0;
+            text-align: center;
+        }
+
+        .hero-section h1 {
+            font-size: 3rem;
+            font-weight: bold;
+        }
+
+        .hero-section p {
+            font-size: 1.25rem;
+            margin-top: 20px;
+        }
+
+        .cta-buttons .btn {
+            margin: 10px;
+            padding: 15px 30px;
+            font-size: 1.25rem;
+        }
+
+        .features-section {
+            padding: 60px 0;
+        }
+
+        .features-section h2 {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 40px;
+            color: #007bff;
+        }
+
+        .feature {
+            text-align: center;
+            padding: 20px;
+        }
+
+        .feature h3 {
+            font-size: 1.5rem;
+            margin-top: 20px;
+            color: #343a40;
+        }
+
+        .feature p {
+            font-size: 1rem;
+            color: #6c757d;
+        }
+
+        .footer {
+            background-color: #343a40;
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+        }
+
+        .footer a {
+            color: white;
+            margin: 0 10px;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-dark">
+    <div class="container">
+        <a class="navbar-brand" href="#">Wealth Watch</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="#features">Features</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#about">About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#contact">Contact</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link btn btn-outline-light" href="/login">Login</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<section class="hero-section">
+    <div class="container">
+        <h1>Monitor Your Investments with Ease</h1>
+        <p>Wealth Watch helps you stay on top of your financial goals. Track, manage, and grow your investments all in one place.</p>
+        <div class="cta-buttons">
+            <a href="/signup" class="btn btn-primary">Get Started</a>
+            <a href="#features" class="btn btn-outline-light">Learn More</a>
+        </div>
+    </div>
+</section>
+
+<section class="features-section" id="features">
+    <div class="container">
+        <h2>Our Features</h2>
+        <div class="row">
+            <div class="col-md-4 feature">
+                <i class="fas fa-chart-line fa-3x text-primary"></i>
+                <h3>Real-Time Analytics</h3>
+                <p>Get up-to-the-minute insights on your portfolio performance with our real-time analytics tools.</p>
+            </div>
+            <div class="col-md-4 feature">
+                <i class="fas fa-user-shield fa-3x text-primary"></i>
+                <h3>Secure & Private</h3>
+                <p>Your data is safe with us. We use state-of-the-art security measures to protect your investments.</p>
+            </div>
+            <div class="col-md-4 feature">
+                <i class="fas fa-mobile-alt fa-3x text-primary"></i>
+                <h3>Mobile Access</h3>
+                <p>Access your investments from anywhere, anytime with our mobile-friendly platform.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer class="footer">
+    <div class="container">
+        <p>&copy; 2024 Wealth Watch. All rights reserved.</p>
+        <p>
+            <a href="#terms">Terms of Service</a> | <a href="#privacy">Privacy Policy</a>
+        </p>
+    </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+</body>
+</html>

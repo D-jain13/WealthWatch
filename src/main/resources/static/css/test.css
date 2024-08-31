@@ -195,7 +195,7 @@
     transition: box-shadow 0.3s ease;
 }
 
-
+/* Create Portfolio */
 .card-body-create{
 	font-family: sans-serif;
 	font-weight: bold;
@@ -220,5 +220,60 @@
 	font-weight: bold;
 }
 
+/* Specific portfolio */
+
+.portfolio-card-body {
+	font-weight: bold;
+	font-size: 16px;
+	color: black;
+	margin-top: 20px;
+	border-radius: 15px;
+	padding: 20px;
+}
+
+.specific-portfolio-card {
+	font-weight: bold;
+	font-size: 16px;
+	color: black;
+	margin: 20px;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+	border-radius: 15px;
+}
+
+.portfolio-title{
+	font-family: Verdana;
+}
+
+.btn-color{
+	background-color : #4D4DA8;
+	color:white;
+}
+
+.custom-margin{
+	margin-top : -45px;
+}
+
+.custom-margin-btn{
+	margin-top : -80px;
+}
 
 
+.custom-thead {
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+    overflow: hidden;
+}
+
+.custom-thead th {
+    background-color: #343a40; 
+    color: #fff; 
+    border: none; 
+}
+
+.custom-thead tr:first-child th:first-child {
+    border-top-left-radius: 12px;
+}
+
+.custom-thead tr:first-child th:last-child {
+    border-top-right-radius: 12px;
+}
