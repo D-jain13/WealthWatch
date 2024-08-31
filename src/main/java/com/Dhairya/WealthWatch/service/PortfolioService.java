@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.Dhairya.WealthWatch.entity.Portfolio;
@@ -30,8 +32,8 @@ public class PortfolioService {
 	@Autowired
 	StockPortfolioRepo stockPortfolioRepo;
 	
-	public List<Portfolio> getAllPortfolioOfUser(String email) {
-		return portfolioRepo.findAllByUserEmail(email);
+	public Page<Portfolio> getAllPortfolioOfUser(String email,Pageable pageable) {
+		return portfolioRepo.findAllByUserEmail(email,pageable);
 	}
 
 	public Portfolio getPortfolioDetails(String id) {

@@ -1,9 +1,10 @@
 package com.Dhairya.WealthWatch.service;
 
-import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.Dhairya.WealthWatch.entity.Stock;
@@ -15,8 +16,8 @@ public class StockService {
 	@Autowired
 	private StockRepo stockRepo;
 
-	public List<Stock> getAllStocks() {
-		return stockRepo.findAll();
+	public Page<Stock> getAllStocks(Pageable pageable) {
+		return stockRepo.findAll(pageable);
 	}
 	
 	public Stock getStockBySymbol(String symbol) {
