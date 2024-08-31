@@ -1,52 +1,72 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Portfolio Details</title>
-    <link rel="stylesheet" href="/css/styles.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+<title>Portfolio Details</title>
+<link rel="stylesheet" href="/css/styles.css">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 </head>
 <body>
-    <div class="wrapper">
-        <div th:replace="header :: header"></div>
 
-        <div class="portfolio-details">
-            <h1 th:text="${portfolio.name}">Portfolio Name</h1>
+	<div th:replace="header :: header"></div>
 
-            <div class="portfolio-info">
-                <p><strong>Invested Value:</strong> <span th:text="'$' + ${portfolio.invested_value}">0.0</span></p>
-                <p><strong>Current Value:</strong> <span th:text="'$' + ${portfolio.current_value}">0.0</span></p>
-                <p><strong>Return Percentage:</strong> 
-                    <span th:classappend="${(portfolio.current_value - portfolio.invested_value) < 0} ? 'negative-return' : 'positive-return'"
-                          th:text="'Return: ' + ${#numbers.formatDecimal((portfolio.current_value - portfolio.invested_value) * 100.0 / portfolio.invested_value, 1, 2)} + '%'">
-                          0%
-                    </span>
-                </p>
-            </div>
+	<div class="portfolio-details">
+		<h1 th:text="${portfolio.name}">Portfolio Name</h1>
 
-            <h2>Stocks in Portfolio</h2>
-            <div class="stocks-container">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Stock Name</th>
-                            <th>Quantity</th>
-                            <th>Current Price</th>
-                            <th>Total Value</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr th:each="stock : ${portfolio.stocks}">
-                            <td th:text="${stock.name}">Stock Name</td>
-                            <td th:text="${stock.quantity}">0</td>
-                            <td th:text="'$' + ${stock.currentPrice}">0.0</td>
-                            <td th:text="'$' + ${stock.quantity * stock.currentPrice}">0.0</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
+		<div class="portfolio-info">
+			<p>
+				<strong>Invested Value:</strong> <span
+					th:text="'$' + ${portfolio.invested_value}">0.0</span>
+			</p>
+			<p>
+				<strong>Current Value:</strong> <span
+					th:text="'$' + ${portfolio.current_value}">0.0</span>
+			</p>
+			<p>
+				<strong>Return Percentage:</strong> <span
+					th:classappend="${(portfolio.current_value - portfolio.invested_value) < 0} ? 'negative-return' : 'positive-return'"
+					th:text="'Return: ' + ${#numbers.formatDecimal((portfolio.current_value - portfolio.invested_value) * 100.0 / portfolio.invested_value, 1, 2)} + '%'">
+					0% </span>
+			</p>
+		</div>
+		<div class="portfolio-actions">
+			<button class="add-stocks-button" 
+        th:onclick="window.location.href='/user/addStocks?portfolioId=' + /*[[${portfolio.id}]]*/ ''">
+    Add Stocks to Portfolio
+</button>
 
-     <div th:replace="footer :: footer"></div>
+	
+			<button class="modify-portfolio-button"
+				onclick="window.location.href='/modify-portfolio-url'">Modify
+				Portfolio</button>
+		</div>
+
+		<h2>Stocks in Portfolio</h2>
+		<div class="stocks-container">
+			<table th:if="${portfolio.stockPortfolios.size() > 0}">
+				<thead>
+					<tr>
+						<th>Stock Symbol</th>
+						<th>Quantity</th>
+						<th>Current Price</th>
+						<th>Total Value</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="stockPortfolio : ${portfolio.stockPortfolios}">
+						<td th:text="${stockPortfolio?.stock?.symbol}">Symbol</td>
+						<td th:text="${stockPortfolio?.quantity}">0</td>
+						<td th:text="'$' + ${stockPortfolio?.stock?.price}">0.0</td>
+						<td
+							th:text="'$' + ${stockPortfolio?.quantity * stockPortfolio?.stock?.price}">0.0</td>
+					</tr>
+				</tbody>
+			</table>
+			<p th:if="${portfolio.stockPortfolios.size() == 0}"
+				class="no-stocks-message">No stocks are present. Add stocks to
+				your portfolio.</p>
+		</div>
+	</div>
+
 </body>
 </html>

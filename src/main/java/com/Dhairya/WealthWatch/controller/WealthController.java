@@ -21,7 +21,9 @@ import com.Dhairya.WealthWatch.repository.PortfolioRepo;
 import com.Dhairya.WealthWatch.repository.StockRepo;
 import com.Dhairya.WealthWatch.repository.UserRepo;
 import com.Dhairya.WealthWatch.service.AlphaVantageService;
+import com.Dhairya.WealthWatch.service.PortfolioService;
 import com.Dhairya.WealthWatch.service.RegistrationService;
+import com.Dhairya.WealthWatch.service.StockService;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -33,22 +35,13 @@ public class WealthController {
 	private UserRepo userRepo;
 	
 	@Autowired
-	private RegistrationService registrationService;
+	private StockService stockService ;
 	
 	@Autowired
-	private AlphaVantageService alphaService;
-	
-	@Autowired
-	private StockRepo stockRepo;
-	
-	@Autowired
-	private PortfolioRepo portfolioRepo;
-	
+	private PortfolioService portfolioService;
 	
 	@GetMapping("/dashboard")
 	public String showDashboard(Model model) {
-//		List<StockQuote> stockQuotes = alphaService.getStockQuote();
-//		model.addAttribute("stockQuotes", stockQuotes);
 		String email = getAuthentication();
 		
 		Optional<User> user = userRepo.findByEmail(email);
@@ -68,7 +61,7 @@ public class WealthController {
 	
 	@GetMapping("/portfolios")
 	public String listAllPortfolios(Model model) {
-		List<Portfolio> portfolios = portfolioRepo.findAllByUserEmail(getAuthentication());
+		List<Portfolio> portfolios = portfolioService.getAllPortfolioOfUser(getAuthentication());
 		model.addAttribute("portfolios", portfolios);
 		return "portfolios";
 	}
@@ -76,8 +69,7 @@ public class WealthController {
 	
 	@GetMapping("/stocks")
 	public String listAllStock(Model model ) {
-		List<Stock> list = stockRepo.findAll();
-		System.out.println(list.toString());
+		List<Stock> list = stockService.getAllStocks();
 		model.addAttribute("Stocks", list);
 		return "stock";
 	}
@@ -89,23 +81,31 @@ public class WealthController {
 	
 	@PostMapping("/create-portfolio")
 	public String portfolioCreater(Portfolio portfolio) {
-		
-		String email = getAuthentication();
-		
-		Optional<User> user = userRepo.findByEmail(email);
-		
-		portfolio.setUser(user.get());
-		portfolioRepo.save(portfolio);
+		portfolioService.createNewPortfolio(portfolio,getAuthentication());
 		return "redirect:/user/dashboard";
 	}
 	
 	@GetMapping("/portfolio/{id}")
 	public String showPortfolioDetails(@PathVariable String id,Model model) {
-		Portfolio portfolio = portfolioRepo.findById(id).get();
+		Portfolio portfolio = portfolioService.getPortfolioDetails(id);
 		model.addAttribute("portfolio", portfolio);
 		return "showPortfolio";
 	}
 	
+	@RequestMapping("/addStockToPortfolio")
+	public String addStockToPortfolio(@RequestParam String portfolioId, @RequestParam String stockSymbol, @RequestParam Integer quantity) {
+	    portfolioService.addStockToPortfolio(portfolioId, stockSymbol, quantity);
+	    return "redirect:/user/portfolio/" + portfolioId;
+	}
+
+	
+	@GetMapping("/addStocks")
+	public String addStockToPortfolioPage(@RequestParam String portfolioId,Model model) {
+		List<Stock> list = stockService.getAllStocks();
+		model.addAttribute("Stocks", list);
+		model.addAttribute("portfolioId", portfolioId);
+		return "addStockToPortfolioPage";
+	}
 	private String getAuthentication() {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		return authentication.getName();

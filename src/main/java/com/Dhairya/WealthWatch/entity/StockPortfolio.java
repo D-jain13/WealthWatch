@@ -1,5 +1,7 @@
 package com.Dhairya.WealthWatch.entity;
 
+import java.time.LocalDate;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -17,8 +19,8 @@ import lombok.Setter;
 public class StockPortfolio {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private String id;
+	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	private int id;
 	
 	@ManyToOne()
 	@JoinColumn(name = "portfolio_id",nullable = false)
@@ -31,4 +33,5 @@ public class StockPortfolio {
 	@Column(nullable = false)
 	private int quantity;
 	
+	private LocalDate date;
 }

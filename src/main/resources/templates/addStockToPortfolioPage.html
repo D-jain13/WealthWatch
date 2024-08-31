@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Stocks</title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+<body>
+    <div th:replace="header :: header"></div>
+    <h1 class="portfolio-heading">List Of Stocks</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Symbol</th>
+                <th>Price</th>
+                <th>High Price</th>
+                <th>Low Price</th>
+                <th>Change</th>
+                <th>Percent Change</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="stock : ${Stocks}" th:onclick="showQuantityPopup([[${stock.symbol}]], [[${portfolioId}]])">
+                <td th:text="${stock.symbol}"></td>
+                <td th:text="${stock.price}"></td>
+                <td th:text="${stock.high_price}"></td>
+                <td th:text="${stock.low_price}"></td>
+                <td th:text="${stock.change}"></td>
+                <td th:text="${stock.change_percent}"></td>
+            </tr>
+        </tbody>
+    </table>
+    <div th:replace="footer :: footer"></div>
+
+    <!-- Modal for Quantity -->
+    <div id="quantityModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2>Add Stock to Portfolio</h2>
+            <p id="stockSymbolDisplay"></p>
+            <label for="quantity">Enter Quantity:</label>
+            <input type="number" id="quantityInput" min="1" placeholder="Quantity">
+            <button onclick="submitQuantity()">Add to Portfolio</button>
+        </div>
+    </div>
+
+    <script>
+        function showQuantityPopup(stockSymbol, portfolioId) {
+            document.getElementById('quantityModal').style.display = "block";
+            document.getElementById('stockSymbolDisplay').innerText = "Stock: " + stockSymbol;
+            document.getElementById('quantityInput').setAttribute('data-symbol', stockSymbol);
+            document.getElementById('quantityInput').setAttribute('data-portfolio-id', portfolioId);
+        }
+
+        function closeModal() {
+            document.getElementById('quantityModal').style.display = "none";
+        }
+
+        function submitQuantity() {
+            let stockSymbol = document.getElementById('quantityInput').getAttribute('data-symbol');
+            let portfolioId = document.getElementById('quantityInput').getAttribute('data-portfolio-id');
+            let quantity = document.getElementById('quantityInput').value;
+            if (quantity !== null && quantity > 0) {
+                window.location.href = `/user/addStockToPortfolio?portfolioId=${portfolioId}&stockSymbol=${stockSymbol}&quantity=${quantity}`;
+            }
+        }
+    </script>
+</body>
+</html>

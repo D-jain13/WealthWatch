@@ -1,54 +1,35 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-
 <head>
-	<title>Stocks</title>
-	<link rel="stylesheet" href="/css/styles.css">
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <title>Stocks</title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 </head>
-
 <body>
-	  <div th:replace="header :: header"></div>
-	<h1 class="portfolio-heading">List Of Stocks</h1>
-	<table>
-		<thead>
-			<tr>
-				<th>Symbol</th>
-				<th>Price</th>
-				<th>High Price</th>
-				<th>Low Price</th>
-				<th>Change</th>
-				<th>Percent Change</th>
-				<th>Select Portfolio</th>
-				<th>Quantity</th>
-				<th>Add To Portfolio</th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr th:each="stock: ${Stocks}">
-				<td th:text="${stock.symbol}"></td>
-				<td th:text="${stock.price}"></td>
-				<td th:text="${stock.high_price}"></td>
-				<td th:text="${stock.low_price}"></td>
-				<td th:text="${stock.change}"></td>
-				<td th:text="${stock.change_percent}"></td>
-				<td>
-					<select>
-						<option value="" disabled selected>Select Portfolio</option>
-						<!-- Iterate over user's portfolios and generate options with portfolio names -->
-						<option th:each="portfolio: ${portfolios}" th:text="${portfolio.name}"></option>
-					</select>
-				</td>
-				<td>
-					<input type="number" name="quantity" placeholder="Quantity">
-				</td>
-				<td>
-					<a href="/user/dashboard" class="stock-button">Add</a>
-				</td>
-			</tr>
-		</tbody>
-	</table>
-	 <div th:replace="footer :: footer"></div>
+    <div th:replace="header :: header"></div>
+    <h1 class="portfolio-heading">List Of Stocks</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Symbol</th>
+                <th>Price</th>
+                <th>High Price</th>
+                <th>Low Price</th>
+                <th>Change</th>
+                <th>Percent Change</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="stock : ${Stocks}" th:onclick="showQuantityPopup('[[${stock.symbol}]]', '[[${portfolioId}]]')">
+                <td th:text="${stock.symbol}"></td>
+                <td th:text="${stock.price}"></td>
+                <td th:text="${stock.high_price}"></td>
+                <td th:text="${stock.low_price}"></td>
+                <td th:text="${stock.change}"></td>
+                <td th:text="${stock.change_percent}"></td>
+            </tr>
+        </tbody>
+    </table>
+    <div th:replace="footer :: footer"></div>
 </body>
-
 </html>
