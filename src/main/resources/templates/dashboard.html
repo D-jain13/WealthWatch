@@ -35,7 +35,6 @@
 				index++;
 				setTimeout(revealText, interval);
 			}
-
 		}
 
 		revealText();
@@ -109,10 +108,61 @@
 				</div>
 			</div>
 		</div>
-	</div>
+	
+	<!-- Card for Top 5 Performing Stocks -->
+        <div class="col-sm-6 mb-3 mb-sm-0">
+            <div class="dashboard-card custom-width" id="stocksCard">
+                <div class="card-body">
+                    <h5 class="card-title" id="toggleTitle">Top 5 Performing Stocks</h5>
+                    <hr>
+                    <ul class="list-group list-group-flush " id="topPerformingList">
+                        <li class="list-group-item" th:each="stock : ${topPerformingStocks}">
+                            <span th:text="${stock.symbol}">AAPL</span>
+                            &emsp; - > &emsp;
+                             <span th:classappend="${(stock.change) < 0} ? 'negative-return' : 'positive-return'" 
+                                  th:text="${stock.change_percent}">5%</span>
+                        </li>
+                    </ul>
+                    <ul class="list-group list-group-flush" id="topLossList" style="display:none;">
+                        <li class="list-group-item" th:each="stock : ${topLossStocks}">
+                            <span th:text="${stock.symbol}">GOOGL</span>
+                            &emsp; - > &emsp;
+                            <span th:classappend="${(stock.change) < 0} ? 'negative-return' : 'positive-return'" 
+                                  th:text="${stock.change_percent}">-3%</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+    let showingTopPerforming = true;
+
+    function toggleStockList() {
+        const titleElement = document.getElementById('toggleTitle');
+        const topPerformingList = document.getElementById('topPerformingList');
+        const topLossList = document.getElementById('topLossList');
+
+        if (showingTopPerforming) {
+            titleElement.textContent = 'Top 5 Loss-Making Stocks';
+            topPerformingList.style.display = 'none';
+            topLossList.style.display = 'block';
+        } else {
+            titleElement.textContent = 'Top 5 Performing Stocks';
+            topPerformingList.style.display = 'block';
+            topLossList.style.display = 'none';
+        }
+
+        showingTopPerforming = !showingTopPerforming;
+    }
+
+    document.getElementById('stocksCard').addEventListener('click', toggleStockList);
+    </script>
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
 		integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-		crossorigin="anonymous"></script>
+		crossorigin="anonymous">
+	</script>
 </body>
 </html>

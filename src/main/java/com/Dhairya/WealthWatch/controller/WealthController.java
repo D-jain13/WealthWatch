@@ -1,5 +1,6 @@
 package com.Dhairya.WealthWatch.controller;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,24 +39,23 @@ public class WealthController {
 	private PortfolioService portfolioService;
 
 	@GetMapping("/test/{id}")
-	public String testPage(@PathVariable String id, @RequestParam(defaultValue = "0") int page,  // default to first page
-	        @RequestParam(defaultValue = "3") int size,Model model) {
-	        Portfolio portfolio = portfolioService.getPortfolioDetails(id);
+	public String testPage(@PathVariable String id, @RequestParam(defaultValue = "0") int page, // default to first page
+			@RequestParam(defaultValue = "3") int size, Model model) {
+		Portfolio portfolio = portfolioService.getPortfolioDetails(id);
 
-	        // Fetch the paginated stocks for the portfolio
-	        Page<StockPortfolio> stockPage = portfolioService.getPaginatedStockPortfolios(id, page, size);
+		// Fetch the paginated stocks for the portfolio
+		Page<StockPortfolio> stockPage = portfolioService.getPaginatedStockPortfolios(id, page, size);
 
-	        model.addAttribute("portfolio", portfolio);
-	        model.addAttribute("stockPage", stockPage);
+		model.addAttribute("portfolio", portfolio);
+		model.addAttribute("stockPage", stockPage);
 		return "test";
 	}
-	
+
 	@GetMapping("/test2")
 	public String testPage2(Model model) {
-		
+
 		return "test2";
 	}
-
 
 	@GetMapping("/dashboard")
 	public String showDashboard(Model model) {
@@ -63,10 +63,14 @@ public class WealthController {
 
 		Optional<User> user = userRepo.findByEmail(email);
 
-			model.addAttribute("username", user.get().getFull_name());
-			model.addAttribute("currentValue", user.get().getTotal_current_value());
-			model.addAttribute("investedAmount", user.get().getTotal_invested_value());
+		List<Stock> top5Stocks = stockService.getTop5PerformingStocks();
+		List<Stock> top5LossStocks = stockService.getTop5LossStocks();
 		
+		model.addAttribute("username", user.get().getFull_name());
+		model.addAttribute("currentValue", user.get().getTotal_current_value());
+		model.addAttribute("investedAmount", user.get().getTotal_invested_value());
+		model.addAttribute("topPerformingStocks", top5Stocks);
+		model.addAttribute("topLossStocks", top5LossStocks);
 
 		return "dashboard";
 	}
@@ -76,7 +80,7 @@ public class WealthController {
 			@RequestParam(name = "size", defaultValue = "3") int size, Model model) {
 		Pageable pageable = PageRequest.of(page, size);
 
-		Page<Portfolio> portfolios = portfolioService.getAllPortfolioOfUser(getAuthentication(),pageable);
+		Page<Portfolio> portfolios = portfolioService.getAllPortfolioOfUser(getAuthentication(), pageable);
 		model.addAttribute("portfolios", portfolios.getContent());
 		model.addAttribute("currentPage", page);
 		model.addAttribute("totalPages", portfolios.getTotalPages());
@@ -109,15 +113,17 @@ public class WealthController {
 	}
 
 	@GetMapping("/portfolio/{id}")
-	public String showPortfolioDetails(@PathVariable String id, @RequestParam(defaultValue = "0") int page,  // default to first page
-	        @RequestParam(defaultValue = "3") int size,Model model) {
+	public String showPortfolioDetails(@PathVariable String id, @RequestParam(defaultValue = "0") int page, // default
+																											// to first
+																											// page
+			@RequestParam(defaultValue = "3") int size, Model model) {
 		Portfolio portfolio = portfolioService.getPortfolioDetails(id);
 
-        // Fetch the paginated stocks for the portfolio
-        Page<StockPortfolio> stockPage = portfolioService.getPaginatedStockPortfolios(id, page, size);
+		// Fetch the paginated stocks for the portfolio
+		Page<StockPortfolio> stockPage = portfolioService.getPaginatedStockPortfolios(id, page, size);
 
-        model.addAttribute("portfolio", portfolio);
-        model.addAttribute("stockPage", stockPage);
+		model.addAttribute("portfolio", portfolio);
+		model.addAttribute("stockPage", stockPage);
 		return "showPortfolio";
 	}
 
@@ -130,8 +136,7 @@ public class WealthController {
 
 	@GetMapping("/addStocks")
 	public String addStockToPortfolioPage(@RequestParam(name = "page", defaultValue = "0") int page,
-			@RequestParam(name = "size", defaultValue = "5") int size,@RequestParam String portfolioId, Model model) {
-		
+			@RequestParam(name = "size", defaultValue = "5") int size, @RequestParam String portfolioId, Model model) {
 
 		Pageable pageable = PageRequest.of(page, size);
 
@@ -139,7 +144,7 @@ public class WealthController {
 		model.addAttribute("stocks", stocks.getContent());
 		model.addAttribute("currentPage", page);
 		model.addAttribute("totalPages", stocks.getTotalPages());
-		
+
 		model.addAttribute("portfolioId", portfolioId);
 		return "addStockToPortfolioPage";
 	}

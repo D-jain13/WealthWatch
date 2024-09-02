@@ -68,10 +68,17 @@ public class PortfolioService {
 		stockPortfolio.setStock(stock);
 		stockPortfolio.setQuantity(quantity);
 		stockPortfolio.setDate(LocalDate.now());
+		
+		
 		Double current_value = portfolio.get().getCurrent_value();
 		current_value += stock.getPrice() * quantity;
 		
-		portfolio.get().setInvested_value(current_value);
+		Double invested_value = portfolio.get().getInvested_value();
+		invested_value += stock.getPrice() * quantity;
+		
+		portfolio.get().setCurrent_value(current_value);
+		portfolio.get().setInvested_value(invested_value);
+		
 		stockPortfolioRepo.save(stockPortfolio);
 	}
 

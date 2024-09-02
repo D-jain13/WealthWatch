@@ -277,3 +277,10 @@
 .custom-thead tr:first-child th:last-child {
     border-top-right-radius: 12px;
 }
+
+
+
+
+.custom-width{
+	width: 50%;
+}
