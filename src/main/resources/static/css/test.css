@@ -17,6 +17,10 @@
 }
 
 /* Dashboard Page */
+.custom-width {
+	width: 50%;
+}
+
 .dashboard-welcome {
 	position: relative;
 	top: 20px;
@@ -25,7 +29,7 @@
 	font-size: 30px;
 	font-weight: bold;
 	margin-bottom: auto;
-	width:60%;
+	width: 60%;
 	color: #333;
 	text-align: left;
 }
@@ -77,14 +81,13 @@
 }
 
 /* Portfolio Page */
-.portfolio-heading,
-.stock-heading {
+.portfolio-heading, .stock-heading {
 	position: relative;
 	top: 16px;
 	left: 22px;
 	text-align: left;
 	font-size: 36px;
-	width:50%;
+	width: 50%;
 	color: #333;
 	text-transform: uppercase;
 	font-weight: bold;
@@ -112,7 +115,7 @@
 	display: grid;
 	grid-template-columns: 1.5fr 1.3fr 0.39fr;
 	align-items: center;
-	background-color: rgb(33 37 41);
+	background-color: rgb(33, 37, 41);
 	color: white;
 	padding: 10px;
 	font-weight: bold;
@@ -123,49 +126,48 @@
 }
 
 .portfolio-name {
-    font-size: 1.2em;
-    color: #333;
-    text-align: left;
-    margin-left: 10px;
+	font-size: 1.2em;
+	color: #333;
+	text-align: left;
+	margin-left: 10px;
 }
 
-
 .portfolio-values {
-    text-align: center;
+	text-align: center;
 }
 
 .portfolio-values p {
-    margin: 5px 0;
-    color: #666;
+	margin: 5px 0;
+	color: #666;
 }
 
 .portfolio-return {
-    text-align: right;
-    font-weight: bolder;
+	text-align: right;
+	font-weight: bolder;
 }
 
 .portfolio-card:hover {
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+	box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
 .negative-return {
-    color: red;
+	color: red;
 }
 
 .positive-return {
-    color: green;
+	color: green;
 }
 
 .portfolio-row-card {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    align-items: center;
-    margin: 10px 30px;
-    padding: 10px;
-    background-color: #fff;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    transition: box-shadow 0.3s ease;
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr;
+	align-items: center;
+	margin: 10px 30px;
+	padding: 10px;
+	background-color: #fff;
+	border-radius: 10px;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+	transition: box-shadow 0.3s ease;
 }
 
 /* Stock Page */
@@ -173,7 +175,7 @@
 	display: grid;
 	grid-template-columns: 1fr 1fr 1fr 1fr 0.8fr 1fr;
 	align-items: center;
-	background-color: rgb(33 37 41);
+	background-color: rgb(33, 37, 41);
 	color: white;
 	padding: 10px;
 	font-weight: bold;
@@ -184,19 +186,19 @@
 }
 
 .stock-row-card {
-    display: grid;
-    grid-template-columns: 0.9fr 1.2fr 1fr 1.12fr 0.92fr 0.8fr 0.1fr;
-    align-items: center;
-    margin: 10px 30px;
-    padding: 15px;
-    background-color: #fff;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    transition: box-shadow 0.3s ease;
+	display: grid;
+	grid-template-columns: 0.9fr 1.2fr 1fr 1.12fr 0.92fr 0.8fr 0.1fr;
+	align-items: center;
+	margin: 10px 30px;
+	padding: 15px;
+	background-color: #fff;
+	border-radius: 10px;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+	transition: box-shadow 0.3s ease;
 }
 
 /* Create Portfolio */
-.card-body-create{
+.card-body-create {
 	font-family: sans-serif;
 	font-weight: bold;
 	font-size: 16px;
@@ -214,14 +216,14 @@
 	margin-left: 10px;
 	margin-top: 20px;
 }
-.card-title-custom{
+
+.card-title-custom {
 	margin-top: 20px;
 	margin-bottom: 50px;
 	font-weight: bold;
 }
 
 /* Specific portfolio */
-
 .portfolio-card-body {
 	font-weight: bold;
 	font-size: 16px;
@@ -240,47 +242,69 @@
 	border-radius: 15px;
 }
 
-.portfolio-title{
+.portfolio-title {
 	font-family: Verdana;
 }
 
-.btn-color{
-	background-color : #4D4DA8;
-	color:white;
+.btn-color {
+	background-color: #4D4DA8;
+	color: white;
 }
 
-.custom-margin{
-	margin-top : -45px;
+.custom-margin {
+	margin-top: -45px;
 }
 
-.custom-margin-btn{
-	margin-top : -80px;
+.custom-margin-btn {
+	margin-top: -80px;
 }
-
 
 .custom-thead {
-    border-top-left-radius: 12px;
-    border-top-right-radius: 12px;
-    overflow: hidden;
+	border-top-left-radius: 12px;
+	border-top-right-radius: 12px;
+	overflow: hidden;
 }
 
 .custom-thead th {
-    background-color: #343a40; 
-    color: #fff; 
-    border: none; 
+	background-color: #343a40;
+	color: #fff;
+	border: none;
 }
 
 .custom-thead tr:first-child th:first-child {
-    border-top-left-radius: 12px;
+	border-top-left-radius: 12px;
 }
 
 .custom-thead tr:first-child th:last-child {
-    border-top-right-radius: 12px;
+	border-top-right-radius: 12px;
 }
 
+body, html {
+	height: 100%;
+	margin: 0;
+	display: flex;
+	flex-direction: column;
+}
 
+.content {
+	flex: 1;
+}
 
+.footer {
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	background-color: black;
+	color: white;
+	text-align: center;
+	padding: 15px 0;
+}
 
-.custom-width{
-	width: 50%;
+.heart-icon {
+	color: red;
+}
+
+.linkedin-icon {
+	margin-left: 10px;
+	color: #0077b5;
 }

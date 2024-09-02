@@ -16,153 +16,160 @@
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 </head>
 <body>
-	<div th:replace="~{fragments/navbar :: navbar}"></div>
+	<div class="content">
+		<div th:replace="~{fragments/navbar :: navbar}"></div>
 
-	<p class="dashboard-welcome">
-		<span id="animated-text"></span>
-	</p>
-	<script th:inline="javascript">
-		var username = /*[[${username}]]*/'';
-		var animatedText = document.getElementById("animated-text");
-		var welcomeText = "Welcome, " + username + "!";
+		<p class="dashboard-welcome">
+			<span id="animated-text"></span>
+		</p>
+		<script th:inline="javascript">
+			var username = /*[[${username}]]*/'';
+			var animatedText = document.getElementById("animated-text");
+			var welcomeText = "Welcome, " + username + "!";
 
-		var index = 0;
-		var interval = 150;
+			var index = 0;
+			var interval = 150;
 
-		function revealText() {
-			if (index < welcomeText.length) {
-				animatedText.innerHTML += welcomeText.charAt(index);
-				index++;
-				setTimeout(revealText, interval);
+			function revealText() {
+				if (index < welcomeText.length) {
+					animatedText.innerHTML += welcomeText.charAt(index);
+					index++;
+					setTimeout(revealText, interval);
+				}
 			}
-		}
 
-		revealText();
-	</script>
-	<div class="row">
-		<div class="col-sm-6 mb-3 mb-sm-0">
-			<div class="dashboard-card">
-				<div class="card-body">
-					<p class="current-value">
-						Current Value: $<span th:text="${currentValue}" id="currentValue"></span>
-					</p>
-					<p class="invested-amount">
-						Invested Value: $<span th:text="${investedAmount}"
-							id="investedAmount"></span>
-					</p>
-					<p class="profit-loss-info"
-						th:classappend=" ${currentValue > investedAmount} ? 'profit-text' : 'loss-text'">
-						<span
-							th:text="${currentValue > investedAmount ? 'Profit: $' + (currentValue - investedAmount) : 'Loss: $' + (investedAmount - currentValue)}"></span>
-					</p>
+			revealText();
+		</script>
+		<div class="row">
+			<div class="col-sm-5 mb-3 mb-sm-0">
+				<div class="dashboard-card">
+					<div class="card-body">
+						<p class="current-value">
+							Current Value: $<span th:text="${currentValue}" id="currentValue"></span>
+						</p>
+
+						<p class="invested-amount">
+							Invested Value: $<span th:text="${investedAmount}"
+								id="investedAmount"></span>
+						</p>
+						<p class="profit-loss-info"
+							th:classappend=" ${currentValue > investedAmount} ? 'profit-text' : 'loss-text'">
+							<span
+								th:text="${currentValue > investedAmount ? 'Profit: $' + (currentValue - investedAmount) : 'Loss: $' + (investedAmount - currentValue)}"></span>
+						</p>
 
 
-					<div class="chart-container">
-						<canvas id="pieChart"></canvas>
-					</div>
-					<script>
-						const currentValue = parseFloat(document
-								.getElementById('currentValue').textContent);
-						const investedAmount = parseFloat(document
-								.getElementById('investedAmount').textContent);
+						<div class="chart-container">
+							<canvas id="pieChart"></canvas>
+						</div>
+						<script>
+							const currentValue = parseFloat(document
+									.getElementById('currentValue').textContent);
+							const investedAmount = parseFloat(document
+									.getElementById('investedAmount').textContent);
 
-						const card = document.querySelector('.card-body');
-						const chartCanvas = document.getElementById('pieChart');
+							const card = document.querySelector('.card-body');
+							const chartCanvas = document
+									.getElementById('pieChart');
 
-						const desiredWidth = card.clientWidth;
-						const desiredHeight = 230;
+							const desiredWidth = card.clientWidth;
+							const desiredHeight = 230;
 
-						chartCanvas.width = desiredWidth;
-						chartCanvas.height = desiredHeight;
+							chartCanvas.width = desiredWidth;
+							chartCanvas.height = desiredHeight;
 
-						const pieData = {
-							labels : [ "Current Value", "Invested Amount" ],
-							datasets : [ {
-								label : "Amount",
-								data : [ currentValue, investedAmount ],
-								backgroundColor : [ "#483d8b", "#FFD700" ],
-								borderColor : [ "#483d8b", "#FFD700" ],
-								borderWidth : 1,
-							}, ],
-							hoverOffset : 4
-						};
+							const pieData = {
+								labels : [ "Current Value", "Invested Amount" ],
+								datasets : [ {
+									label : "Amount",
+									data : [ currentValue, investedAmount ],
+									backgroundColor : [ "#483d8b", "#FFD700" ],
+									borderColor : [ "#483d8b", "#FFD700" ],
+									borderWidth : 1,
+								}, ],
+								hoverOffset : 4
+							};
 
-						const pieOptions = {
-							responsive : false,
-							plugins : {
-								legend : {
-									position : 'bottom',
+							const pieOptions = {
+								responsive : false,
+								plugins : {
+									legend : {
+										position : 'bottom',
+									},
 								},
-							},
-						};
+							};
 
-						const ctxPie = chartCanvas.getContext('2d');
-						;
-						const myPieChart = new Chart(ctxPie, {
-							type : 'doughnut',
-							data : pieData,
-							options : pieOptions,
-						});
-					</script>
+							const ctxPie = chartCanvas.getContext('2d');
+							;
+							const myPieChart = new Chart(ctxPie, {
+								type : 'doughnut',
+								data : pieData,
+								options : pieOptions,
+							});
+						</script>
 
+					</div>
+				</div>
+			</div>
+
+			<!-- Card for Top 5 Performing Stocks -->
+			<div class="col-sm-6 mb-3 mb-sm-0">
+				<div class="dashboard-card w-50" id="stocksCard">
+					<div class="card-body">
+						<h5 class="card-title" id="toggleTitle">Top 5 Performing
+							Stocks</h5>
+						<hr>
+						<ul class="list-group list-group-flush " id="topPerformingList">
+							<li class="list-group-item"
+								th:each="stock : ${topPerformingStocks}"><span
+								th:text="${stock.symbol}">AAPL</span> &emsp; - > &emsp; <span
+								th:classappend="${(stock.change) < 0} ? 'negative-return' : 'positive-return'"
+								th:text="${stock.change_percent}">5%</span></li>
+						</ul>
+						<ul class="list-group list-group-flush" id="topLossList"
+							style="display: none;">
+							<li class="list-group-item" th:each="stock : ${topLossStocks}">
+								<span th:text="${stock.symbol}">GOOGL</span> &emsp; - > &emsp; <span
+								th:classappend="${(stock.change) < 0} ? 'negative-return' : 'positive-return'"
+								th:text="${stock.change_percent}">-3%</span>
+							</li>
+						</ul>
+					</div>
 				</div>
 			</div>
 		</div>
-	
-	<!-- Card for Top 5 Performing Stocks -->
-        <div class="col-sm-6 mb-3 mb-sm-0">
-            <div class="dashboard-card custom-width" id="stocksCard">
-                <div class="card-body">
-                    <h5 class="card-title" id="toggleTitle">Top 5 Performing Stocks</h5>
-                    <hr>
-                    <ul class="list-group list-group-flush " id="topPerformingList">
-                        <li class="list-group-item" th:each="stock : ${topPerformingStocks}">
-                            <span th:text="${stock.symbol}">AAPL</span>
-                            &emsp; - > &emsp;
-                             <span th:classappend="${(stock.change) < 0} ? 'negative-return' : 'positive-return'" 
-                                  th:text="${stock.change_percent}">5%</span>
-                        </li>
-                    </ul>
-                    <ul class="list-group list-group-flush" id="topLossList" style="display:none;">
-                        <li class="list-group-item" th:each="stock : ${topLossStocks}">
-                            <span th:text="${stock.symbol}">GOOGL</span>
-                            &emsp; - > &emsp;
-                            <span th:classappend="${(stock.change) < 0} ? 'negative-return' : 'positive-return'" 
-                                  th:text="${stock.change_percent}">-3%</span>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
+	</div>
+	<div th:replace="~{footer :: footer}"></div>
+	<script>
+		let showingTopPerforming = true;
 
-    <script>
-    let showingTopPerforming = true;
+		function toggleStockList() {
+			const titleElement = document.getElementById('toggleTitle');
+			const topPerformingList = document
+					.getElementById('topPerformingList');
+			const topLossList = document.getElementById('topLossList');
 
-    function toggleStockList() {
-        const titleElement = document.getElementById('toggleTitle');
-        const topPerformingList = document.getElementById('topPerformingList');
-        const topLossList = document.getElementById('topLossList');
+			if (showingTopPerforming) {
+				titleElement.textContent = 'Top 5 Loss-Making Stocks';
+				topPerformingList.style.display = 'none';
+				topLossList.style.display = 'block';
+			} else {
+				titleElement.textContent = 'Top 5 Performing Stocks';
+				topPerformingList.style.display = 'block';
+				topLossList.style.display = 'none';
+			}
 
-        if (showingTopPerforming) {
-            titleElement.textContent = 'Top 5 Loss-Making Stocks';
-            topPerformingList.style.display = 'none';
-            topLossList.style.display = 'block';
-        } else {
-            titleElement.textContent = 'Top 5 Performing Stocks';
-            topPerformingList.style.display = 'block';
-            topLossList.style.display = 'none';
-        }
+			showingTopPerforming = !showingTopPerforming;
+		}
 
-        showingTopPerforming = !showingTopPerforming;
-    }
-
-    document.getElementById('stocksCard').addEventListener('click', toggleStockList);
-    </script>
+		document.getElementById('stocksCard').addEventListener('click',
+				toggleStockList);
+	</script>
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
 		integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
 		crossorigin="anonymous">
+		
 	</script>
 </body>
 </html>
