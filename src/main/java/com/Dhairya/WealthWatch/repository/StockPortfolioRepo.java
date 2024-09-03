@@ -1,5 +1,7 @@
 package com.Dhairya.WealthWatch.repository;
 
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -11,5 +13,6 @@ import com.Dhairya.WealthWatch.entity.StockPortfolio;
 public interface StockPortfolioRepo extends JpaRepository<StockPortfolio, Integer> {
 
 	Page<StockPortfolio> findByPortfolioId(String portfolioId, Pageable pageable);
+	List<StockPortfolio> findByPortfolioId(String portfolioId);
 
 }

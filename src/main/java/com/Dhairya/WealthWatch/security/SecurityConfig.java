@@ -32,7 +32,7 @@ public class SecurityConfig {
 		http
 		.authorizeHttpRequests((authorize)-> authorize
 				.requestMatchers("/login","/register","/static/**","/css/**").permitAll()
-				//.requestMatchers("/**").permitAll()
+				.requestMatchers("/**").permitAll()
 				.requestMatchers("/user/**")
 				.anonymous()
 				.anyRequest().authenticated()

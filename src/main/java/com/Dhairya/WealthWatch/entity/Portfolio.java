@@ -2,6 +2,7 @@ package com.Dhairya.WealthWatch.entity;
 
 import java.util.List;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -33,7 +34,7 @@ public class Portfolio {
 	@Column(columnDefinition = "DOUBLE PRECISION DEFAULT 0.0")
 	private double current_value;
 	
-	@OneToMany(mappedBy = "portfolio")
+	@OneToMany(mappedBy = "portfolio",cascade = CascadeType.ALL)
 	private List<StockPortfolio> stockPortfolios;
 
 	@ManyToOne

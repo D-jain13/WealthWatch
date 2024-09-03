@@ -11,11 +11,13 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.Dhairya.WealthWatch.entity.Portfolio;
 import com.Dhairya.WealthWatch.entity.Stock;
@@ -67,7 +69,7 @@ public class WealthController {
 		List<Stock> top5LossStocks = stockService.getTop5LossStocks();
 		
 		model.addAttribute("username", user.get().getFull_name());
-		model.addAttribute("currentValue", user.get().getTotal_current_value());
+		model.addAttribute("currentValue", portfolioService.calculateTotalCurrentValueForUser(email));
 		model.addAttribute("investedAmount", user.get().getTotal_invested_value());
 		model.addAttribute("topPerformingStocks", top5Stocks);
 		model.addAttribute("topLossStocks", top5LossStocks);
@@ -81,6 +83,11 @@ public class WealthController {
 		Pageable pageable = PageRequest.of(page, size);
 
 		Page<Portfolio> portfolios = portfolioService.getAllPortfolioOfUser(getAuthentication(), pageable);
+		
+		for(Portfolio portfolio : portfolios) {
+			portfolioService.calculatePortfolioCurrentValue(portfolio.getId());
+		}
+		
 		model.addAttribute("portfolios", portfolios.getContent());
 		model.addAttribute("currentPage", page);
 		model.addAttribute("totalPages", portfolios.getTotalPages());
@@ -92,8 +99,8 @@ public class WealthController {
 	public String listAllStock(@RequestParam(name = "page", defaultValue = "0") int page,
 			@RequestParam(name = "size", defaultValue = "5") int size, Model model) {
 		Pageable pageable = PageRequest.of(page, size);
-
 		Page<Stock> stocks = stockService.getAllStocks(pageable);
+	
 		model.addAttribute("stocks", stocks.getContent());
 		model.addAttribute("currentPage", page);
 		model.addAttribute("totalPages", stocks.getTotalPages());
@@ -113,9 +120,7 @@ public class WealthController {
 	}
 
 	@GetMapping("/portfolio/{id}")
-	public String showPortfolioDetails(@PathVariable String id, @RequestParam(defaultValue = "0") int page, // default
-																											// to first
-																											// page
+	public String showPortfolioDetails(@PathVariable String id, @RequestParam(defaultValue = "0") int page,																			// page
 			@RequestParam(defaultValue = "3") int size, Model model) {
 		Portfolio portfolio = portfolioService.getPortfolioDetails(id);
 
@@ -130,7 +135,7 @@ public class WealthController {
 	@RequestMapping("/addStockToPortfolio")
 	public String addStockToPortfolio(@RequestParam String portfolioId, @RequestParam String stockSymbol,
 			@RequestParam Integer quantity) {
-		portfolioService.addStockToPortfolio(portfolioId, stockSymbol, quantity);
+		portfolioService.addStockToPortfolio(portfolioId, stockSymbol, quantity,getAuthentication());
 		return "redirect:/user/portfolio/" + portfolioId;
 	}
 
@@ -147,6 +152,13 @@ public class WealthController {
 
 		model.addAttribute("portfolioId", portfolioId);
 		return "addStockToPortfolioPage";
+	}
+	
+	@GetMapping("/delete/{id}")
+	public String deletePortfolio(@PathVariable String id, RedirectAttributes redirectAttributes) {
+	    portfolioService.deletePortfolio(id,getAuthentication());
+	    redirectAttributes.addFlashAttribute("message", "Portfolio deleted successfully.");
+	    return "redirect:/user/portfolios";
 	}
 
 	private String getAuthentication() {

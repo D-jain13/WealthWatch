@@ -38,14 +38,14 @@ public class AlphaVantageService {
 
 	String[] stockSymbols = { "AAPL", "AMZN", "ABBV", "ADBE", "AMD", "BMY", "COST", "CVX", "DIS", "HD", "JNJ", "JPM",
 			"KO", "MA", "META", "MSFT", "MRK", "NVDA", "PEP", "PG", "PYPL", "UNH", "UNP", "VZ", "WMT" };
-
+	
 	//@Scheduled(cron = "0 0 1 * * ?")
 	public void getStockQuoteAutomatically() {
 		if (isDayChanged()) {
             dailyCount = 0;
         }
 
-		if (dailyCount < 50) {
+		if (dailyCount < 25) {
 			getStockQuote();
 		}
 	}
@@ -71,7 +71,7 @@ public class AlphaVantageService {
 		int symbolsToProcess = Math.min(batchSize, stockSymbols.length - startIndex);
 
 		for (int i = startIndex; i < startIndex + symbolsToProcess; i++) {
-			if (dailyCount >= 50) {
+			if (dailyCount >= 25) {
 				break; 
 			}
 
@@ -103,7 +103,7 @@ public class AlphaVantageService {
 		startIndex += batchSize;
 		
 		
-		if(startIndex==49) {
+		if(startIndex==24) {
 			startIndex=0;
 		}
 		
