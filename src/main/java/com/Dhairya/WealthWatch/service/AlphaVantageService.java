@@ -39,23 +39,23 @@ public class AlphaVantageService {
 	String[] stockSymbols = { "AAPL", "AMZN", "ABBV", "ADBE", "AMD", "BMY", "COST", "CVX", "DIS", "HD", "JNJ", "JPM",
 			"KO", "MA", "META", "MSFT", "MRK", "NVDA", "PEP", "PG", "PYPL", "UNH", "UNP", "VZ", "WMT" };
 	
-	//@Scheduled(cron = "0 0 1 * * ?")
+	@Scheduled(cron = "0 0 1 * * ?")
 	public void getStockQuoteAutomatically() {
 		if (isDayChanged()) {
-            dailyCount = 0;
+            dailyCount = 0; 
         }
 
 		if (dailyCount < 25) {
 			getStockQuote();
 		}
 	}
-
-	//@Scheduled(fixedDelay = 60000)
-	public void getStockQuoteAutomaticallyEvery5Minute() {
-		if (dailyCount < 50) {
-			getStockQuote();
+ 
+	@Scheduled(fixedDelay = 60000)
+		public void getStockQuoteAutomaticallyEvery5Minute() {
+			if (dailyCount < 25) {
+				getStockQuote();
+			}
 		}
-	}
 
 	private boolean isDayChanged() {
         Calendar calendar = new GregorianCalendar();
@@ -92,7 +92,7 @@ public class AlphaVantageService {
 					StockResponse stockRes = mapper.readValue(jsonResponse, StockResponse.class);
 					
 					stockRepo.save(stockRes.getStock());
-					
+					  
 					dailyCount++;
 				}
 			} catch (Exception e) {

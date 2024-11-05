@@ -10,7 +10,7 @@
 	<body>
 	    <div class="login-container">
 	        <div class="login-box">
-				<img src="/logo.png" alt="Company Logo" width="200" height="90">
+				<img th:src="@{/logo.png}" alt="Company Logo" width="170" height="200">
 	            <form th:action="@{/login}" method="POST">
 	                <div class="input-container">
 	                    <label for="username">Username:</label>
@@ -26,4 +26,4 @@
 	        </div>
 	    </div>
 	</body>
-	</html>
+	</html> 
