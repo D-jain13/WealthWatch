@@ -50,7 +50,7 @@ public class AlphaVantageService {
 		}
 	}
  
-	@Scheduled(fixedDelay = 60000)
+	//@Scheduled(fixedDelay = 60000)
 		public void getStockQuoteAutomaticallyEvery5Minute() {
 			if (dailyCount < 25) {
 				getStockQuote();

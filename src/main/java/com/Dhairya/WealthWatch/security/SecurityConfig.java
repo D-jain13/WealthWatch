@@ -2,6 +2,7 @@ package com.Dhairya.WealthWatch.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -31,24 +32,24 @@ public class SecurityConfig {
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 		http
 		.authorizeHttpRequests((authorize)-> authorize
-				.requestMatchers("/login","/register","/static/**","/css/**","/logo.png").permitAll() 	
+				.requestMatchers("/login","/register","/static/**","/css/**","/logo.png","/registerSuccess/**").permitAll()
 				.requestMatchers("/user/**").authenticated()
 				)
-			
+
 			.formLogin((form) -> form
 				.loginPage("/login")
 				.defaultSuccessUrl("/user/dashboard")
 				.permitAll()
 				)
-			  
+
 			.logout(logout -> logout
 	                .logoutUrl("/logout")
 	                .logoutSuccessUrl("/login")
 	                )
-			
-			.csrf().disable()
-			.cors().disable();
-		
+				.cors(cors -> cors.disable())
+				.csrf(csrf -> csrf.disable());
+
+
 		return http.build();
 	}
 }
